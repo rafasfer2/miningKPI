@@ -130,15 +130,45 @@
 #' }
 "haul_monthly_consolidated_sn"
 
-#' Variabilidade de Processo: Carga (Brucutu)
+#' Histórico de Performance: Frota de Carga (Padrão GPV-M)
 #'
-#' Dados diários de escavadeiras focados em análise de variabilidade (CEP).
-#' Inclui classificação climática (Chuvoso/Seco) para estudos de impacto ambiental.
-#' @format Tibble diária.
+#' Dados diários de operação de escavadeiras e pás carregadeiras (Brucutu).
+#' A árvore de tempos foi recalculada seguindo o padrão de mercado (GPV-M) para
+#' garantir o fechamento matemático: HT = (HEF + HAO) + (HTD + HTI).
+#'
+#' @format Tibble diária:
+#' \describe{
+#'   \item{data}{Data de referência.}
+#'   \item{turno}{Turno de operação (1 a 4).}
+#'   \item{id_equipamento}{Identificador anonimizado (ESC-XX ou PA-XX).}
+#'   \item{periodo_climatico}{Classificação do turno (Chuvoso/Seco).}
+#'   \item{produtividade_ht}{Produtividade baseada nas horas trabalhadas (t/HT).}
+#'   \item{massa_carregada}{Massa total movimentada no turno (ton).}
+#'   \item{carga_media}{Carga média por caçambada/ciclo (ton).}
+#'   \item{num_ciclos}{Número de ciclos de carga realizados.}
+#'   \item{tmc}{Tempo Médio de Carregamento (ciclo).}
+#'   \item{HT}{Horas Trabalhadas Totais (Soma de HTP e HTNP).}
+#'   \item{HTP}{Horas Trabalhadas Produtivas (Soma de HEF e HAO).}
+#'   \item{HTNP}{Horas Trabalhadas Não Produtivas (Soma de HTD e HTI).}
+#'   \item{HEF}{Horas Efetivas (Tempo real produzindo).}
+#'   \item{HAO}{Horas de Atraso Operacional (Perdas de processo).}
+#' }
+#' @source Dados internos anonimizados (2021), processados com engenharia reversa de tempos.
 "load_daily_cep_br"
 
-#' Variabilidade de Processo: Transporte (Brucutu)
+
+#' Histórico de Performance: Transporte (Brucutu)
 #'
-#' Dados diários de caminhões para análise de estabilidade operacional.
-#' @format Tibble diária.
+#' Dados diários de caminhões fora de estrada. Este dataset é rico pois reconstrói
+#' o Tempo de Ciclo Total (TTC) e a Árvore de Horas (HT, HEF) a partir de variáveis
+#' isoladas, permitindo exercícios de engenharia reversa.
+#'
+#' @format Tibble diária:
+#' \describe{
+#'   \item{produtividade_ht}{Indicador de gestão: Produção / Horas Trabalhadas (t/h).}
+#'   \item{tempo_ciclo_total}{Soma de Tempos Fixos + Viagens (estimado via velocidade).}
+#'   \item{tempo_fixo}{Soma de filas, manobras e operações de carga/descarga.}
+#'   \item{HT}{Horas Trabalhadas (HEF + HAO + HTNP).}
+#'   \item{HEF}{Horas Efetivas (recalculado via UF e Atrasos).}
+#' }
 "haul_daily_cep_br"
