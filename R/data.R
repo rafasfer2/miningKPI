@@ -342,3 +342,20 @@
 #'   \item{num_caminhoes_plan}{Dimensionamento de frota previsto.}
 #' }
 "plan_daily_budget_it"
+
+#' Metas Detalhadas de Transporte 2021 (Itabira)
+#'
+#' Conjunto de dados de planejamento (Budget) com granularidade de tempos de ciclo.
+#' Ideal para comparar não apenas se a meta de produção foi batida, mas *por que*
+#' (ex: a meta de fila era 2min e o realizado foi 5min).
+#'
+#' @format Tibble diária:
+#' \describe{
+#'   \item{data}{Dia de referência da meta.}
+#'   \item{meta_tempo_carregamento}{Meta de tempo de carregamento (min).}
+#'   \item{meta_tempo_fila_carga}{Meta de tempo de fila (min).}
+#'   \item{meta_vel_global}{Meta de velocidade média (km/h).}
+#'   \item{DF_plan}{Meta de Disponibilidade Física.}
+#' }
+#' @source Dados internos de planejamento de lavra (2021).
+"plan_daily_detailed_2021_it"
