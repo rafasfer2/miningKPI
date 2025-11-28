@@ -172,3 +172,29 @@
 #'   \item{HEF}{Horas Efetivas (recalculado via UF e Atrasos).}
 #' }
 "haul_daily_cep_br"
+
+#' Tabela de Classificação de Eventos (Padrão PNR)
+#'
+#' Tabela de referência que define como cada tipo de evento deve ser classificado
+#' na árvore de horas (Disponibilidade vs. Utilização). Baseada na revisão 09 da tabela de apropriação.
+#'
+#' @format Tibble com regras de negócio:
+#' \describe{
+#'   \item{evento}{Nome genérico do evento (ex: Falta de Energia).}
+#'   \item{origem_causa}{Contexto específico (ex: Falha interna vs. Concessionária).}
+#'   \item{impacta_disponibilidade}{Booleano: Se TRUE, penaliza a Disponibilidade (DF).}
+#'   \item{impacta_utilizacao}{Booleano: Se TRUE, penaliza a Utilização (UF).}
+#'   \item{classificacao_hora}{Sigla da hora resultante (HOE, HOI, HMP, HMNP, HTNP).}
+#' }
+#' @details
+#' Use esta tabela para ensinar a diferença entre uma parada que afeta a manutenção
+#' (HMNP/HMP) e uma parada que é responsabilidade da operação (HOI/HTNP).
+#'
+#' * **HMNP:** Hora de Manutenção Não Planejada (Corretiva).
+#' * **HMP:** Hora de Manutenção Planejada (Preventiva).
+#' * **HOI:** Hora Ociosa Interna (Perda Operacional).
+#' * **HOE:** Hora Ociosa Externa (Fatores exógenos).
+#' * **HTNP:** Hora Trabalhada Não Produtiva (Apoio).
+#'
+#' @source Tabela de apropriação de eventos_rev.09.
+"meta_event_classification"

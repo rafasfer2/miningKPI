@@ -1,0 +1,79 @@
+evento,origem_causa,impacta_disponibilidade,impacta_utilizacao,classificacao_hora
+Falta de Energia,Falha na Concessionária ou Racionamento de Energia,FALSE,TRUE,HOE
+Falta de Energia,Desligamento para manobras operacionais,FALSE,TRUE,HOI
+Falta de Energia,Desligamento para manutenção preventiva,TRUE,FALSE,HMP
+Falta de Energia,Qualquer falha no sistema interno de energia,TRUE,FALSE,HMNP
+Sensor identificou falha,Existência de falha no Equipamento,TRUE,FALSE,HMNP
+Sensor identificou falha,Existência de perda Operacional,FALSE,TRUE,HOI
+Sensor identificou falha,Existência de perda no Processo,FALSE,TRUE,HOI
+Tempo de reboque,Após falha do Equipamento,TRUE,FALSE,HMNP
+Falta de Combustível,Problemas internos para fornecer,FALSE,TRUE,HOI
+Falta de Combustível,Indisponibilidade do Mercado Externo,FALSE,TRUE,HOE
+Falta de Combustível,Falha clara do Equipamento,TRUE,FALSE,HMNP
+Falta de Combustível,Perda no Processo (operar até acabar),FALSE,TRUE,HOI
+Sobrecarga (Térmico Atuado),Existência de falha no Equipamento,TRUE,FALSE,HMNP
+Sobrecarga (Térmico Atuado),Existência de perda Operacional,FALSE,TRUE,HOI
+Sobrecarga (Térmico Atuado),Existência de perda no Processo,FALSE,TRUE,HOI
+Sensor atuado por limpeza,Sensor foi danificado,TRUE,FALSE,HMNP
+Sensor atuado por limpeza,Sensor foi atuado,FALSE,TRUE,HOI
+Instrumento de proteção,Existência de falha no Equipamento,TRUE,FALSE,HMNP
+Instrumento de proteção,Existência de perda Operacional,FALSE,TRUE,HOI
+Instrumento de proteção,Existência de perda no Processo,FALSE,TRUE,HOI
+Período de resfriamento,Manutenção Corretiva,TRUE,FALSE,HMNP
+Período de resfriamento,Manutenção Preventiva,TRUE,FALSE,HMP
+Ramp up / Aquecimento,Após perda Operacional,FALSE,TRUE,HTNP
+Ramp up / Aquecimento,Após falha Externa a Vale,FALSE,TRUE,HOE
+Ramp up / Aquecimento,Após Manutenção Corretiva,FALSE,TRUE,HOI
+Ramp up / Aquecimento,Após Manutenção Preventiva,FALSE,TRUE,HOI
+Ramp up / Aquecimento,Problemas de Manutenção afetando Setup,TRUE,FALSE,HMNP
+Ramp up / Aquecimento,Após falha Externa a Área,FALSE,TRUE,HTNP
+Testes a pedido da operação,Considerar falha de manutenção,TRUE,FALSE,HMNP
+Testes a pedido da operação,Existência de perda Operacional,FALSE,TRUE,HOI
+Testes a pedido da operação,Existência de perda no Processo,FALSE,TRUE,HOI
+Parada sem causa aparente,Existência de falha no Equipamento,TRUE,FALSE,HMNP
+Parada sem causa aparente,Existência de perda Operacional,FALSE,TRUE,HOI
+Parada sem causa aparente,Existência de perda no Processo,FALSE,TRUE,HOI
+Parada sem causa aparente,Existência de falha Externa a Vale,FALSE,TRUE,HOE
+Falha Intermitente,Existência de falha no Equipamento,TRUE,FALSE,HMNP
+Falha Intermitente,Existência de perda Operacional,TRUE,FALSE,HMNP
+Falha Intermitente,Existência de perda no Processo,TRUE,FALSE,HMNP
+Acidentes com perda de função,Existência de falha no Equipamento,TRUE,FALSE,HMNP
+Acidentes com perda de função,Existência de perda Operacional,TRUE,FALSE,HMNP
+Acidentes com perda de função,Existência de perda no Processo,TRUE,FALSE,HMNP
+Parada horário de ponta,Economia de energia,FALSE,TRUE,HOI
+Falhas de manutenção,Falha de Manutenção,TRUE,FALSE,HMNP
+Parada programada,Para ajuste de Processo,FALSE,TRUE,HOI
+Parada programada,Para Manutenção Preventiva,TRUE,FALSE,HMP
+Parada programada,Para Obra de Ampliação (Engenharia),TRUE,FALSE,HMP
+Paradas corretivas projetos,Manutenção Corretiva,TRUE,FALSE,HMNP
+Perdas Operacionais,Sem perda de Função,FALSE,TRUE,HOI
+Perdas Operacionais,Com perda de Função,TRUE,FALSE,HMNP
+Aferição vagão INMETRO,Manutenção Preventiva,TRUE,FALSE,HMP
+Avaria de vagões Cliente,Falha Externa a Vale,TRUE,FALSE,HMNP
+Retenção no trecho,Acidente no Trecho,TRUE,FALSE,HMNP
+Vagões imobilizados,Transporte de Carga,FALSE,TRUE,HTNP
+Reboque locomotiva (areia),Falha Externa a Vale,FALSE,TRUE,HOE
+Calibragem de pneu,Item de Segurança,TRUE,FALSE,HMP
+Regulagem de retrovisor,Ajuste de Equipamento,FALSE,TRUE,HOI
+Troca haste perfuratriz,Fim de Vida Útil por Desgaste,FALSE,TRUE,HOI
+Troca haste perfuratriz,Existência de falha no Equipamento,TRUE,FALSE,HMNP
+Troca haste perfuratriz,Existência de perda Operacional,FALSE,TRUE,HOI
+Deslocamento para oficina,Para Manutenção Corretiva,TRUE,FALSE,HMNP
+Deslocamento para oficina,Para Manutenção Preventiva,TRUE,FALSE,HMP
+Falta de pneus,Em Estoque e com falha do Equipamento,TRUE,FALSE,HMNP
+Falta de pneus,Em Estoque e com parada preventiva,TRUE,FALSE,HMP
+Falta de pneus,Problemas de Mercado e com falha,TRUE,FALSE,HMNP
+Falta de pneus,Problemas de Mercado e com preventiva,TRUE,FALSE,HMP
+Liberação após intervenção,Após Manutenção Corretiva,FALSE,TRUE,HOI
+Liberação após intervenção,Após Manutenção Preventiva,FALSE,TRUE,HOI
+Limpeza de Equipamento,"Conservação (Lavagem, Cabine, Esteiras)",FALSE,TRUE,HTNP
+Limpeza de Equipamento,Limpeza para Preventiva (Op),TRUE,FALSE,HMP
+Limpeza de Equipamento,Limpeza para Preventiva (Manut),TRUE,FALSE,HMP
+Limpeza de Equipamento,Limpeza para Corretiva (Op),TRUE,FALSE,HMNP
+Limpeza de Equipamento,Limpeza para Corretiva (Manut),TRUE,FALSE,HMNP
+Manutenção > Acordado,Por perda Operacional,FALSE,TRUE,HOI
+Manutenção > Acordado,Extrapolação do Tempo Preventiva,TRUE,FALSE,HMP
+Manutenção de oportunidade,Janela de oportunidade,TRUE,FALSE,HMP
+Manutenção de oportunidade,Falha Externa - Baixa Demanda,TRUE,FALSE,HMP
+Manutenção de oportunidade,Fim da Janela e pendência impeditiva,TRUE,FALSE,HMP
+Deslocamento dep. apoio,Equipamento de apoio em Manutenção,FALSE,TRUE,HOI
