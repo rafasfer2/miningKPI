@@ -359,3 +359,26 @@
 #' }
 #' @source Dados internos de planejamento de lavra (2021).
 "plan_daily_detailed_2021_it"
+
+#' Ciclo de Transporte Detalhado (Serra Norte)
+#'
+#' Dados "Micro" (evento a evento) de cada viagem realizada pelos caminhões.
+#' Contém a decomposição completa dos tempos (Vazio, Fila, Carga, Cheio, Bascula),
+#' permitindo análises granulares de gargalos e histogramas de carga.
+#'
+#' @format Tibble com registros de viagens:
+#' \describe{
+#'   \item{id_ciclo}{Identificador sequencial da viagem.}
+#'   \item{TVV}{Tempo de Viagem Vazio (min).}
+#'   \item{TFC}{Tempo de Fila na Carga (min).}
+#'   \item{TMC}{Tempo de Manobra na Carga (min).}
+#'   \item{TC}{Tempo de Carregamento (min).}
+#'   \item{TVC}{Tempo de Viagem Cheio (min).}
+#'   \item{TFB}{Tempo de Fila no Basculamento (min).}
+#'   \item{TMB}{Tempo de Manobra no Basculamento (min).}
+#'   \item{TB}{Tempo de Basculamento (min).}
+#'   \item{massa_transportada}{Carga útil (Payload) em toneladas.}
+#'   \item{tkph_viagem}{TKPH realizado nesta viagem específica.}
+#' }
+#' @source Sistema de Despacho Eletrônico (Modular/Jigsaw), anonimizado.
+"haul_cycle_sn"
