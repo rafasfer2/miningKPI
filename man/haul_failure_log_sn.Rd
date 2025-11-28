@@ -14,6 +14,7 @@ Tibble com registros de falhas:
 \item{duracao_h}{Duração total real da falha (horas).}
 \item{causa}{Descrição da causa da falha (se disponível).}
 \item{categoria}{Categoria da manutenção (HMC, MPNS...).}
+\item{status}{Status do equipamento durante a falha.}
 }
 }
 \usage{
@@ -21,7 +22,7 @@ haul_failure_log_sn
 }
 \description{
 Dados de eventos de falha contínuos para caminhões fora de estrada.
-Diferente do log de turno, aqui os eventos \strong{não} são quebrados na virada do dia.
+Diferente do log de turno, aqui os eventos \strong{NÃO} são quebrados na virada do dia.
 Fundamental para cálculos precisos de MTBF, MTTR e análises de Confiabilidade (Weibull/NHPP).
 }
 \keyword{datasets}

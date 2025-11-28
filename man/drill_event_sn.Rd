@@ -5,21 +5,29 @@
 \alias{drill_event_sn}
 \alias{load_event_sn}
 \alias{infra_event_sn}
+\alias{haul_shift_log_sn}
 \title{Log de Turno: Perfuração (Serra Norte)}
 \format{
 Tibble com registros de eventos por turno:
 \describe{
 \item{id_equipamento}{Identificador anonimizado (DRILL-XXXX).}
-\item{data}{Data de referência.}
+\item{data}{Data de referência do apontamento.}
 \item{turno}{Turno de operação.}
-\item{duracao_h}{Duração do evento em horas.}
+\item{equipe}{Equipe responsável.}
+\item{inicio}{Timestamp de início do estado.}
+\item{fim}{Timestamp de fim do estado.}
+\item{duracao_h}{Duração do evento em horas (fracionado por turno).}
 \item{status}{Estado macro (Apto, Parada, Manutenção).}
 \item{codigo}{Código numérico do apontamento.}
+\item{categoria}{Categoria da hora (HEF, HMC, etc.).}
+\item{descricao}{Descrição textual do apontamento.}
 }
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 348899 rows and 11 columns.
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 344384 rows and 11 columns.
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1706730 rows and 11 columns.
 }
 \usage{
 drill_event_sn
@@ -27,13 +35,21 @@ drill_event_sn
 load_event_sn
 
 infra_event_sn
+
+haul_shift_log_sn
 }
 \description{
 Dados de apontamento de perfuratrizes, segmentados por turno de trabalho.
 Focados em KPIs de gestão diária (Disponibilidade, Utilização).
+Eventos que atravessam a virada do turno são fragmentados para garantir o fechamento de 24h.
 
 Dados de apontamento de escavadeiras e pás carregadeiras.
+Segue a mesma estrutura de fragmentação por turno.
 
 Dados de apontamento de equipamentos de apoio (Tratores, Motoniveladoras, Pipa).
+Segue a mesma estrutura de fragmentação por turno.
+
+Dados de apontamento de caminhões fora de estrada, segmentados por turno.
+Ideal para cálculo de OEE e KPIs operacionais diários.
 }
 \keyword{datasets}
