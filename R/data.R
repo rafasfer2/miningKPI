@@ -307,3 +307,38 @@
 #' Leitura de horímetro para cálculo de idade operacional.
 #' @format Tibble.
 "infra_water_truck_hourmeter_br"
+
+# ==============================================================================
+# DADOS DE ITABIRA (PLANEJAMENTO E KPI)
+# ==============================================================================
+
+#' Histórico Diário de Transporte (Itabira)
+#'
+#' Dados consolidados diários da frota de transporte (Mina C).
+#' Contém KPIs de disponibilidade, utilização e produção recalculados com lógica GPV-M.
+#'
+#' @format Tibble diária:
+#' \describe{
+#'   \item{data}{Data de referência.}
+#'   \item{id_equipamento}{Identificador anonimizado (TR-IT-XX).}
+#'   \item{DF}{Disponibilidade Física (%).}
+#'   \item{produtividade_ht}{Produtividade (t/HT).}
+#'   \item{producao_total}{Massa transportada (ton).}
+#'   \item{HEF}{Horas Efetivas.}
+#'   \item{HAO}{Horas de Atraso Operacional.}
+#' }
+"haul_daily_summary_it"
+
+#' Metas Diárias de Transporte (Itabira)
+#'
+#' Orçamento (Budget) diário para a frota de transporte.
+#' Deve ser cruzado com `haul_daily_summary_it` para análise de aderência (Real x Meta).
+#'
+#' @format Tibble diária:
+#' \describe{
+#'   \item{data}{Data da meta.}
+#'   \item{DF_plan}{Meta de Disponibilidade (%).}
+#'   \item{producao_plan}{Meta de Produção (ton).}
+#'   \item{num_caminhoes_plan}{Dimensionamento de frota previsto.}
+#' }
+"plan_daily_budget_it"
