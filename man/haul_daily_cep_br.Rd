@@ -3,13 +3,20 @@
 \docType{data}
 \name{haul_daily_cep_br}
 \alias{haul_daily_cep_br}
-\title{Histórico de Performance: Transporte (Brucutu)}
+\title{Histórico de Performance: Transporte (Padrão GPV-M)}
 \format{
 Tibble diária:
 \describe{
 \item{produtividade_ht}{Indicador de gestão: Produção / Horas Trabalhadas (t/h).}
+\item{tkph}{Tonelada-Quilômetro por Hora (Indicador de Pneus).}
+\item{dmt}{Distância Média de Transporte (km).}
+\item{vel_global}{Velocidade média global (km/h).}
+\item{vel_cheio}{Velocidade média carregado (km/h).}
+\item{vel_vazio}{Velocidade média vazio (km/h).}
 \item{tempo_ciclo_total}{Soma de Tempos Fixos + Viagens (estimado via velocidade).}
 \item{tempo_fixo}{Soma de filas, manobras e operações de carga/descarga.}
+\item{tempo_viagem_cheio}{Tempo de viagem carregado calculado (min).}
+\item{tempo_viagem_vazio}{Tempo de viagem vazio calculado (min).}
 \item{HT}{Horas Trabalhadas (HEF + HAO + HTNP).}
 \item{HEF}{Horas Efetivas (recalculado via UF e Atrasos).}
 }
@@ -18,8 +25,8 @@ Tibble diária:
 haul_daily_cep_br
 }
 \description{
-Dados diários de caminhões fora de estrada. Este dataset é rico pois reconstrói
+Dados diários de caminhões fora de estrada (Brucutu). Este dataset é rico pois reconstrói
 o Tempo de Ciclo Total (TTC) e a Árvore de Horas (HT, HEF) a partir de variáveis
-isoladas, permitindo exercícios de engenharia reversa.
+isoladas, permitindo exercícios de engenharia reversa e análise de variabilidade.
 }
 \keyword{datasets}

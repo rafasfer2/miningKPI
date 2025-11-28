@@ -12,8 +12,9 @@ Tibble com registros mensais:
 \item{tipo_ordem}{Classificação da Ordem (ex: YPM=Preventiva, YEM=Emergencial).}
 \item{custo_pecas}{Valor gasto em peças e materiais (R$).}
 \item{custo_servicos_mo}{Valor gasto em serviços e mão de obra (R$).}
-\item{custo_insumos}{Valor gasto em óleo e lubrificantes (R$).}
-\item{custo_outros}{Outras despesas.}
+\item{custo_combustivel}{Valor gasto em óleo diesel e lubrificantes (R$).}
+\item{custo_pneus}{Custos específicos de gestão de pneus (R$).}
+\item{custo_outros}{Outras despesas administrativas ou não categorizadas.}
 \item{custo_total}{Soma dos custos do equipamento naquele mês/tipo de ordem.}
 }
 }

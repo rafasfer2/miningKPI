@@ -217,3 +217,57 @@
 #'
 #' @source Tabela de apropriação de eventos_rev.09.
 "meta_event_classification"
+
+# ==============================================================================
+# DADOS DE INFRAESTRUTURA E APOIO
+# ==============================================================================
+
+#' Histórico de Manutenção: Tratores de Esteira (Serra Norte)
+#'
+#' Log detalhado de ordens de serviço e intervenções em tratores de esteira (Infraestrutura).
+#' Contém a descrição textual do problema e solução, permitindo análise de falhas
+#' em equipamentos de apoio.
+#'
+#' @format Tibble de eventos:
+#' \describe{
+#'   \item{id_equipamento}{Identificador anonimizado (TRAT-XXX).}
+#'   \item{inicio}{Timestamp de início da manutenção.}
+#'   \item{duracao_h}{Duração da intervenção em horas.}
+#'   \item{categoria}{Tipo de hora (HMC, MPNS, HAC...).}
+#'   \item{sistema}{Sistema afetado (Motor, Material Rodante, Lâmina...).}
+#'   \item{problema}{Descrição do defeito relatado.}
+#'   \item{solucao}{Descrição da atividade realizada.}
+#' }
+#' @source Dados internos de manutenção de infraestrutura (Carajás).
+"maint_track_dozer_sn"
+
+# ==============================================================================
+# DADOS DE ITABIRITO (CASE: OTIMIZAÇÃO DE PREVENTIVA)
+# ==============================================================================
+
+#' Histórico de Manutenção: Caminhões Itabirito (Case Preventiva)
+#'
+#' Log de eventos de manutenção focado em um estudo de otimização de periodicidade
+#' (Preventiva de 250h/500h). Contém flag indicando revisões sistemáticas.
+#'
+#' @format Tibble de eventos:
+#' \describe{
+#'   \item{id_equipamento}{Identificador anonimizado (TR-IT-XX).}
+#'   \item{duracao_h}{Duração da parada.}
+#'   \item{categoria}{HMC (Corretiva) ou MPS (Preventiva).}
+#'   \item{horimetro_evento}{Leitura do horímetro no momento da ordem.}
+#'   \item{is_preventiva}{Booleano indicando se foi uma revisão programada.}
+#' }
+"maint_truck_events_it"
+
+#' Histórico de Horímetro: Caminhões Itabirito
+#'
+#' Leitura diária dos horímetros para cálculo de idade operacional (Weibull/NHPP).
+#' @rdname maint_truck_events_it
+"maint_truck_hourmeter_it"
+
+#' Histórico de Pautas: Caminhões Itabirito
+#'
+#' Registro das revisões programadas (ex: 500h, 1000h) realizadas.
+#' @rdname maint_truck_events_it
+"maint_truck_pautas_it"
