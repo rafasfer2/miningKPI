@@ -5,135 +5,149 @@ library(readxl)
 library(janitor)
 library(fs)
 library(lubridate)
-library(tsibble)
 library(usethis)
 
-# --- 1. FUNÇÃO DE LEITURA (Modular) ---
-ler_premissas_ano <- function(ano, nome_arquivo) {
+# --- 1. CONFIGURAÇÃO ---
+path_2021 <- "K:/Meu Drive/Dados_Confidenciais/premissas_2021_sn.xlsm"
+path_2022 <- "K:/Meu Drive/Dados_Confidenciais/premissas_2022_sn.xlsm"
+path_2023 <- "K:/Meu Drive/Dados_Confidenciais/premissas_2023_sn.xlsm"
 
-  caminho <- paste0("K:/Meu Drive/Dados_Confidenciais/", nome_arquivo)
-  if (!file.exists(caminho)) stop(paste("Arquivo não encontrado:", nome_arquivo))
-
-  message(paste("Lendo premissas", ano, "..."))
-
-  # A. LEITURA DE BLOCOS (Ranges Específicos do Excel)
-
-  # Número de Caminhões
-  n_trucks <- read_excel(caminho, sheet = "Resumo_transp", range = "B6:N12") %>%
-    rename(fleet = 1) %>% # Renomeia a primeira coluna independente do nome
-    pivot_longer(-fleet, names_to = "mes_nome", values_to = "num_caminhoes_plan")
-
-  # Horas Trabalhadas
-  ht_plan <- read_excel(caminho, sheet = "Resumo_transp", range = "B48:N54") %>%
-    rename(fleet = 1) %>%
-    pivot_longer(-fleet, names_to = "mes_nome", values_to = "HT_plan")
-
-  # Horas Manutenção
-  hm_plan <- read_excel(caminho, sheet = "Resumo_transp", range = "B253:N263") %>% # Range ajustado para cobrir variação de linhas
-    rename(fleet = 1) %>%
-    filter(!is.na(fleet), fleet != "240st") %>%
-    pivot_longer(-fleet, names_to = "mes_nome", values_to = "HM_plan")
-
-  # Horas Calendário
-  hc_plan <- read_excel(caminho, sheet = "Resumo_transp", range = "B235:N242") %>%
-    rename(fleet = 1) %>%
-    filter(!is.na(fleet), fleet != "240st") %>%
-    pivot_longer(-fleet, names_to = "mes_nome", values_to = "HC_plan")
-
-  # Movimentação Total (Produção)
-  prod_plan <- read_excel(caminho, sheet = "Resumo_transp", range = "B60:N66") %>%
-    rename(fleet = 1) %>%
-    pivot_longer(-fleet, names_to = "mes_nome", values_to = "producao_plan")
-
-  # DMT (Distância)
-  dmt_plan <- read_excel(caminho, sheet = "Resumo_transp", range = "AG69:AS75") %>%
-    rename(fleet = 1) %>%
-    pivot_longer(-fleet, names_to = "mes_nome", values_to = "dmt_plan")
-
-  # Carga Média (Apenas se a aba existir, 2023 tem, 2021 as vezes não na mesma aba)
-  # Vamos focar no core para não quebrar em anos diferentes
-
-  # B. CONSOLIDAÇÃO DO ANO
-  # Junta tudo num dataframe só
-  dados_ano <- n_trucks %>%
-    left_join(ht_plan, by = c("fleet", "mes_nome")) %>%
-    left_join(hm_plan, by = c("fleet", "mes_nome")) %>%
-    left_join(hc_plan, by = c("fleet", "mes_nome")) %>%
-    left_join(prod_plan, by = c("fleet", "mes_nome")) %>%
-    left_join(dmt_plan, by = c("fleet", "mes_nome")) %>%
-
-    mutate(
-      ano_ref = ano,
-      # Converte nome do mês (Jan, Fev...) para Data
-      # Assumindo ordem das colunas no Excel: Jan, Fev...
-      mes_num = match(str_sub(mes_nome, 1, 3), c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez")),
-      data = make_date(ano, mes_num, 1)
-    ) %>%
-    filter(!is.na(data))
-
-  return(dados_ano)
+if (!all(file.exists(path_2021, path_2022, path_2023))) {
+  stop("Algum arquivo de premissas não foi encontrado!")
 }
 
-# --- 2. EXECUÇÃO DOS ANOS ---
-# Ajuste os ranges na função acima se os Excels de 2021/22 tiverem linhas diferentes
-# (O seu código original tinha ranges fixos diferentes para cada ano, tentei unificar)
+# --- 2. FUNÇÃO DE LEITURA SEGURA ---
+ler_range <- function(arquivo, range_excel, nome_valor, ano) {
+  # Lê sem cabeçalho
+  raw <- suppressMessages(
+    read_excel(arquivo, sheet = "Resumo_transp", range = range_excel, col_names = FALSE)
+  )
 
-# Se os ranges forem muito diferentes, melhor rodar blocos separados.
-# Vou usar a lógica segura baseada no seu código original:
+  # Garante que pegou dados
+  if (nrow(raw) == 0) return(NULL)
 
-# 2021
-plan_2021 <- ler_premissas_ano(2021, "premissas_2021_sn.xlsm")
+  # Seleciona as 13 colunas (Frota + 12 meses)
+  # Se o range pegou mais colunas vazias à direita, cortamos
+  raw <- raw[, 1:13]
+  colnames(raw) <- c("frota_orig", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
-# 2022
-plan_2022 <- ler_premissas_ano(2022, "premissas_2022_sn.xlsm")
+  raw %>%
+    # Remove linhas onde o nome da frota está vazio
+    filter(!is.na(frota_orig)) %>%
+    pivot_longer(-frota_orig, names_to = "mes_num", values_to = "valor") %>%
+    mutate(
+      ano = ano,
+      indicador = nome_valor,
+      data = make_date(ano, as.numeric(mes_num), 1),
+      # Força numérico e trata lixo de texto como NA
+      valor = as.numeric(as.character(valor))
+    ) %>%
+    filter(!is.na(valor)) %>%
+    select(data, frota_orig, indicador, valor)
+}
 
-# 2023
-plan_2023 <- ler_premissas_ano(2023, "premissas_2023_sn.xlsm")
+# --- 3. PROCESSAMENTO ANO A ANO ---
+message("Processando 2021...")
+df_2021 <- bind_rows(
+  ler_range(path_2021, "B6:N12",    "num_caminhoes_plan", 2021),
+  ler_range(path_2021, "B48:N54",   "HT_plan", 2021),
+  ler_range(path_2021, "B255:N263", "HM_plan", 2021),
+  ler_range(path_2021, "B235:N242", "HC_plan", 2021),
+  ler_range(path_2021, "B60:N66",   "producao_plan", 2021),
+  ler_range(path_2021, "AG69:AS75", "dmt_plan", 2021)
+)
 
-# --- 3. CONSOLIDAÇÃO FINAL ---
+message("Processando 2022...")
+df_2022 <- bind_rows(
+  ler_range(path_2022, "B6:N12",    "num_caminhoes_plan", 2022),
+  ler_range(path_2022, "B48:N54",   "HT_plan", 2022),
+  ler_range(path_2022, "B255:N263", "HM_plan", 2022),
+  ler_range(path_2022, "B235:N242", "HC_plan", 2022),
+  ler_range(path_2022, "B60:N66",   "producao_plan", 2022),
+  ler_range(path_2022, "AG69:AS75", "dmt_plan", 2022)
+)
+
+message("Processando 2023...")
+df_2023 <- bind_rows(
+  ler_range(path_2023, "B6:N12",    "num_caminhoes_plan", 2023),
+  ler_range(path_2023, "B48:N54",   "HT_plan", 2023),
+  ler_range(path_2023, "B253:N259", "HM_plan", 2023),
+  ler_range(path_2023, "B235:N241", "HC_plan", 2023),
+  ler_range(path_2023, "B60:N66",   "producao_plan", 2023),
+  ler_range(path_2023, "AG69:AS75", "dmt_plan", 2023)
+)
+
+# --- 4. CONSOLIDAÇÃO E PIVOTAGEM ---
 set.seed(999)
 
-plan_budget_assumptions_sn <- bind_rows(plan_2021, plan_2022, plan_2023) %>%
-  transmute(
-    unidade = "Mina A",
-    data,
-    frota = fleet,
+dados_totais <- bind_rows(df_2021, df_2022, df_2023)
 
-    # Metas Principais
-    num_caminhoes_plan,
-    producao_plan,
-    dmt_plan,
-
-    # Horas
-    HC_plan,
-    HM_plan,
-    HT_plan,
-
-    # KPIs Calculados (Meta)
-    DF_plan = (HC_plan - HM_plan) / HC_plan * 100,
-    produtividade_plan = ifelse(HT_plan > 0, producao_plan / HT_plan, 0)
+plan_budget_assumptions_sn <- dados_totais %>%
+  # A. PADRONIZAÇÃO DE NOMES (Mais permissiva)
+  mutate(
+    frota_limpa = case_when(
+      str_detect(frota_orig, "797") ~ "CAT 797F",
+      str_detect(frota_orig, "793") ~ "CAT 793D",
+      str_detect(frota_orig, "930") ~ "Komatsu 930E",
+      str_detect(frota_orig, "830") ~ "Komatsu 830E",
+      str_detect(frota_orig, "794") ~ "CAT 794AC",
+      # Se não reconhecer, mantem o original para não perder dados no filtro
+      TRUE ~ frota_orig
+    )
   ) %>%
+
+  # Agrupa para somar duplicatas (caso existam)
+  group_by(data, frota_limpa, indicador) %>%
+  summarise(valor = sum(valor, na.rm = TRUE), .groups = "drop") %>%
+
+  # B. PIVOTAGEM (Cria as colunas hc_plan, hm_plan, etc.)
+  pivot_wider(
+    names_from = indicador,
+    values_from = valor,
+    values_fill = 0
+  ) %>%
+  clean_names()
+
+# --- 4.5 GARANTIA DE COLUNAS ---
+# Se alguma coluna não foi criada (porque estava vazia no Excel), cria ela com 0
+cols_necessarias <- c("hc_plan", "hm_plan", "ht_plan", "producao_plan", "num_caminhoes_plan", "dmt_plan")
+for(col in cols_necessarias) {
+  if(!col %in% names(plan_budget_assumptions_sn)) {
+    plan_budget_assumptions_sn[[col]] <- 0
+    warning(paste("Coluna", col, "não encontrada nos dados brutos. Preenchida com 0."))
+  }
+}
+
+# --- 5. CÁLCULOS FINAIS ---
+plan_budget_assumptions_sn <- plan_budget_assumptions_sn %>%
+  mutate(
+    # Cálculos
+    DF_plan = ifelse(hc_plan > 0, (hc_plan - hm_plan) / hc_plan * 100, 0),
+    produtividade_plan = ifelse(ht_plan > 0, producao_plan / ht_plan, 0)
+  ) %>%
+
+  # Filtro Final: Só mantem linhas que parecem ser de frota válida (tem disponibilidade calculada)
+  filter(hc_plan > 0) %>%
 
   # Anonimização
   mutate(
-    # Mascarar Frota (Ex: CAT 793D -> FROTA-A)
-    id_frota = paste0("FROTA-", LETTERS[as.numeric(as.factor(frota))]),
+    unidade = "Mina A",
+    id_frota = paste0("FROTA-", sprintf("%02d", as.numeric(as.factor(frota_limpa)))),
 
-    # Deslocar Datas (-1 ano)
     data = data - years(1),
 
-    # Perturbação (+- 1%)
     across(where(is.numeric), ~ round(.x * runif(n(), 0.99, 1.01), 2))
   ) %>%
 
-  select(-frota) %>%
-  filter(!is.na(DF_plan))
+  select(data, id_frota, everything(), -frota_limpa)
 
-# --- 4. SALVAR ---
-glimpse(plan_budget_assumptions_sn)
-
-usethis::use_data(plan_budget_assumptions_sn, overwrite = TRUE)
-fs::dir_create("inst/extdata")
-write_csv(plan_budget_assumptions_sn, "inst/extdata/plan_budget_assumptions_sn.csv")
-
-message("Dataset 'plan_budget_assumptions_sn' (Premissas Orçamentárias) processado!")
+# --- 6. SALVAR ---
+if (nrow(plan_budget_assumptions_sn) > 0) {
+  glimpse(plan_budget_assumptions_sn)
+  usethis::use_data(plan_budget_assumptions_sn, overwrite = TRUE)
+  fs::dir_create("inst/extdata")
+  write_csv(plan_budget_assumptions_sn, "inst/extdata/plan_budget_assumptions_sn.csv")
+  message("Dataset 'plan_budget_assumptions_sn' processado com sucesso!")
+} else {
+  warning("O dataset final ficou vazio. Verifique os ranges do Excel.")
+}
