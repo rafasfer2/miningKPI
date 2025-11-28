@@ -382,3 +382,22 @@
 #' }
 #' @source Sistema de Despacho Eletrônico (Modular/Jigsaw), anonimizado.
 "haul_cycle_sn"
+
+#' Histórico de Ordens de Serviço: Transporte (Serra Norte)
+#'
+#' Registro detalhado ("Rico") de intervenções de manutenção (2020-2025).
+#' Diferente do log de eventos, este dataset contém a taxonomia completa da falha
+#' (Sistema, Conjunto, Item) e os descritivos de Problema/Solução, permitindo
+#' análises de confiabilidade profundas (FMEA, Pareto, NLP).
+#'
+#' @format Tibble de ordens de serviço:
+#' \describe{
+#'   \item{num_ordem}{Número da OS (SAP).}
+#'   \item{mp_intervalo}{Se for preventiva, indica o intervalo (ex: 250, 500).}
+#'   \item{sistema}{Sistema veicular afetado (ex: Motor Diesel).}
+#'   \item{conjunto}{Sub-sistema (ex: Sistema de Combustível).}
+#'   \item{problema}{Relato do operador/mecânico sobre o defeito.}
+#'   \item{solucao}{Ação corretiva realizada.}
+#'   \item{duracao_h}{Tempo total da intervenção.}
+#' }
+"haul_maint_history_sn"
