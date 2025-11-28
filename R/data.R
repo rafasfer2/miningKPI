@@ -271,3 +271,39 @@
 #' Registro das revisões programadas (ex: 500h, 1000h) realizadas.
 #' @rdname maint_truck_events_it
 "maint_truck_pautas_it"
+
+# ==============================================================================
+# DADOS DE INFRAESTRUTURA (CAMINHÃO PIPA / IRRIGAÇÃO)
+# ==============================================================================
+
+#' Histórico de Eventos: Caminhão Pipa (Brucutu)
+#'
+#' Log de operações e manutenções da frota de irrigação (Infraestrutura).
+#' Focado no estudo de otimização de periodicidade de preventiva.
+#'
+#' @format Tibble de eventos:
+#' \describe{
+#'   \item{id_equipamento}{Identificador anonimizado (PIPA-XX).}
+#'   \item{duracao_h}{Duração do evento.}
+#'   \item{categoria}{HMC, MPS, etc.}
+#' }
+"infra_water_truck_events_br"
+
+#' Plano de Custos de Preventiva (Caminhão Pipa)
+#'
+#' Lista de peças e custos associados a cada tipo de revisão (300h, 600h...).
+#' Permite calcular o custo total de cada estratégia de manutenção.
+#' @format Tibble.
+"infra_water_truck_cost_plan"
+
+#' Lista de Tarefas de Manutenção (Caminhão Pipa)
+#'
+#' Detalhamento das atividades executadas em cada revisão (check-list).
+#' @format Tibble.
+"infra_water_truck_task_list"
+
+#' Horímetro Diário: Caminhão Pipa
+#'
+#' Leitura de horímetro para cálculo de idade operacional.
+#' @format Tibble.
+"infra_water_truck_hourmeter_br"
