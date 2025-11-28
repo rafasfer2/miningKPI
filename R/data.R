@@ -129,3 +129,16 @@
 #'   \item{HAO_calc}{Horas de Atraso Operacional somadas do log de eventos.}
 #' }
 "haul_monthly_consolidated_sn"
+
+#' Variabilidade de Processo: Carga (Brucutu)
+#'
+#' Dados diários de escavadeiras focados em análise de variabilidade (CEP).
+#' Inclui classificação climática (Chuvoso/Seco) para estudos de impacto ambiental.
+#' @format Tibble diária.
+"load_daily_cep_br"
+
+#' Variabilidade de Processo: Transporte (Brucutu)
+#'
+#' Dados diários de caminhões para análise de estabilidade operacional.
+#' @format Tibble diária.
+"haul_daily_cep_br"
