@@ -401,3 +401,37 @@
 #'   \item{duracao_h}{Tempo total da intervenção.}
 #' }
 "haul_maint_history_sn"
+
+#' Indicadores Mensais: Perfuração (Serra Norte)
+#'
+#' Série histórica de KPIs (DF, UF, MTBF) para a frota de perfuratrizes.
+#' @format Tibble mensal.
+"drill_kpi_monthly_sn"
+
+#' Indicadores Mensais: Carga (Serra Norte)
+#'
+#' Série histórica para Escavadeiras e Pás Carregadeiras.
+#' @format Tibble mensal.
+"load_kpi_monthly_sn"
+
+#' Indicadores Mensais: Infraestrutura (Serra Norte)
+#'
+#' Série histórica para Tratores de Esteira e Motoniveladoras (Patrol).
+#' @format Tibble mensal.
+"infra_kpi_monthly_sn"
+
+#' Premissas Orçamentárias Anuais (Serra Norte)
+#'
+#' Dados consolidados do orçamento (Budget) anual, detalhados mês a mês por frota.
+#' Contém as metas físicas (DMT, Produção) e de disponibilidade que nortearam o ano.
+#'
+#' @format Tibble mensal:
+#' \describe{
+#'   \item{data}{Mês de referência.}
+#'   \item{id_frota}{Identificador da frota (ex: FROTA-A).}
+#'   \item{num_caminhoes_plan}{Quantidade de ativos orçada.}
+#'   \item{dmt_plan}{Distância Média de Transporte planejada.}
+#'   \item{DF_plan}{Meta de Disponibilidade Física.}
+#' }
+#' @source Planilhas de Premissas Orçamentárias (Engenharia de Minas).
+"plan_budget_assumptions_sn"
