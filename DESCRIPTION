@@ -12,3 +12,5 @@ RoxygenNote: 7.3.3
 Depends: 
     R (>= 3.5)
 LazyData: true
+URL: https://github.com/rafasfer2/miningKPI
+BugReports: https://github.com/rafasfer2/miningKPI/issues
