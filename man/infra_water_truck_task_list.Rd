@@ -3,7 +3,7 @@
 \docType{data}
 \name{infra_water_truck_task_list}
 \alias{infra_water_truck_task_list}
-\title{Lista de Tarefas de Manutenção (Caminhão Pipa)}
+\title{Lista de Tarefas: Caminhão Pipa (Mina B)}
 \format{
 Tibble.
 }
@@ -11,6 +11,6 @@ Tibble.
 infra_water_truck_task_list
 }
 \description{
-Detalhamento das atividades executadas em cada revisão (check-list).
+Lista de Tarefas: Caminhão Pipa (Mina B)
 }
 \keyword{datasets}

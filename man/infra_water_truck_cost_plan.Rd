@@ -3,7 +3,7 @@
 \docType{data}
 \name{infra_water_truck_cost_plan}
 \alias{infra_water_truck_cost_plan}
-\title{Plano de Custos de Preventiva (Caminhão Pipa)}
+\title{Plano de Custos: Caminhão Pipa (Mina B)}
 \format{
 Tibble.
 }
@@ -11,7 +11,6 @@ Tibble.
 infra_water_truck_cost_plan
 }
 \description{
-Lista de peças e custos associados a cada tipo de revisão (300h, 600h...).
-Permite calcular o custo total de cada estratégia de manutenção.
+Plano de Custos: Caminhão Pipa (Mina B)
 }
 \keyword{datasets}
