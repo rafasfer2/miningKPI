@@ -28,4 +28,34 @@ infra_kpi_monthly_mine_a
 \description{
 KPIs mensais oficiais (Requipam) para diversas frotas.
 }
+\seealso{
+Other "Gestão e Estratégia": 
+\code{\link{meta_dictionary}},
+\code{\link{meta_event_classification}},
+\code{\link{plan_budget_assumptions_mine_a}},
+\code{\link{plan_daily_budget_mine_c}},
+\code{\link{plan_daily_detailed_2021_mine_c}}
+
+Other "Gestão e Estratégia": 
+\code{\link{meta_dictionary}},
+\code{\link{meta_event_classification}},
+\code{\link{plan_budget_assumptions_mine_a}},
+\code{\link{plan_daily_budget_mine_c}},
+\code{\link{plan_daily_detailed_2021_mine_c}}
+
+Other "Gestão e Estratégia": 
+\code{\link{meta_dictionary}},
+\code{\link{meta_event_classification}},
+\code{\link{plan_budget_assumptions_mine_a}},
+\code{\link{plan_daily_budget_mine_c}},
+\code{\link{plan_daily_detailed_2021_mine_c}}
+
+Other "Gestão e Estratégia": 
+\code{\link{meta_dictionary}},
+\code{\link{meta_event_classification}},
+\code{\link{plan_budget_assumptions_mine_a}},
+\code{\link{plan_daily_budget_mine_c}},
+\code{\link{plan_daily_detailed_2021_mine_c}}
+}
+\concept{"Gestão e Estratégia"}
 \keyword{datasets}

@@ -8,7 +8,7 @@ library(usethis)
 library(tsibble)
 
 # --- 1. CONFIGURAÇÃO ---
-caminho_real <- "K:/Meu Drive/Dados_Confidenciais/data_requipam.Rdata"
+caminho_real <- "L:/Meu Drive/Dados_Confidenciais/data_requipam.Rdata"
 
 if (!file.exists(caminho_real)) {
   stop("Arquivo data_requipam.Rdata não encontrado!")

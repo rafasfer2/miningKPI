@@ -8,9 +8,9 @@ library(lubridate)
 library(usethis)
 
 # --- 1. CONFIGURAÇÃO ---
-path_2021 <- "K:/Meu Drive/Dados_Confidenciais/premissas_2021_sn.xlsm"
-path_2022 <- "K:/Meu Drive/Dados_Confidenciais/premissas_2022_sn.xlsm"
-path_2023 <- "K:/Meu Drive/Dados_Confidenciais/premissas_2023_sn.xlsm"
+path_2021 <- "L:/Meu Drive/Dados_Confidenciais/premissas_2021_sn.xlsm"
+path_2022 <- "L:/Meu Drive/Dados_Confidenciais/premissas_2022_sn.xlsm"
+path_2023 <- "L:/Meu Drive/Dados_Confidenciais/premissas_2023_sn.xlsm"
 
 if (!all(file.exists(path_2021, path_2022, path_2023))) {
   stop("Algum arquivo de premissas não foi encontrado!")

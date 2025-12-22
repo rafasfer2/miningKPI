@@ -8,7 +8,7 @@ library(lubridate)
 library(usethis)
 
 # --- 1. CONFIGURAÇÃO ---
-caminho_real <- "K:/Meu Drive/Dados_Confidenciais/manutencao_preventiva_itabirito.xlsx"
+caminho_real <- "L:/Meu Drive/Dados_Confidenciais/manutencao_preventiva_itabirito.xlsx"
 
 if (!file.exists(caminho_real)) {
   stop("Arquivo não encontrado! Verifique o nome 'manutencao_preventiva_itabirito.xlsx'")

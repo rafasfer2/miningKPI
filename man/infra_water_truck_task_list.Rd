@@ -13,4 +13,13 @@ infra_water_truck_task_list
 \description{
 Lista de Tarefas: Caminhão Pipa (Mina B)
 }
+\seealso{
+Other "Infraestrutura e Apoio": 
+\code{\link{drill_event_mine_a}},
+\code{\link{infra_water_truck_cost_plan}},
+\code{\link{infra_water_truck_events_mine_b}},
+\code{\link{infra_water_truck_hourmeter_mine_b}},
+\code{\link{maint_track_dozer_mine_a}}
+}
+\concept{"Infraestrutura e Apoio"}
 \keyword{datasets}

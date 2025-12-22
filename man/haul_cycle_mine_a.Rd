@@ -19,5 +19,13 @@ haul_cycle_mine_a
 }
 \description{
 Dados "Micro" (ciclo a ciclo) contendo a decomposição de tempos e produção.
+Essencial para análise de tempos de fila e tempos fixos.
 }
+\seealso{
+Other "Transporte e Ciclo": 
+\code{\link{drill_event_mine_a}},
+\code{\link{haul_daily_cep_mine_b}},
+\code{\link{haul_daily_summary_mine_c}}
+}
+\concept{"Transporte e Ciclo"}
 \keyword{datasets}

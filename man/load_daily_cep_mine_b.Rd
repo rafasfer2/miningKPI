@@ -19,4 +19,9 @@ load_daily_cep_mine_b
 \description{
 Dados diários de escavadeiras seguindo a árvore de tempos padrão (GPV-M).
 }
+\seealso{
+Other "Carga e Perfuração": 
+\code{\link{drill_event_mine_a}}
+}
+\concept{"Carga e Perfuração"}
 \keyword{datasets}

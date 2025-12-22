@@ -7,8 +7,8 @@ library(fs)
 library(usethis) # <--- ADICIONADO: Essencial para o use_data funcionar
 
 # --- 1. CONFIGURAÇÃO DE CAMINHOS ---
-path_shift <- "K:/Meu Drive/Dados_Confidenciais/data_appoint.Rdata"
-path_event <- "K:/Meu Drive/Dados_Confidenciais/data_trucks_appoint_for_event.Rdata"
+path_shift <- "L:/Meu Drive/Dados_Confidenciais/data_appoint.Rdata"
+path_event <- "L:/Meu Drive/Dados_Confidenciais/data_trucks_appoint_for_event.Rdata"
 
 if (!file.exists(path_shift)) stop(paste("Arquivo não encontrado:", path_shift))
 

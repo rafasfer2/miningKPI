@@ -7,7 +7,7 @@ library(fs)
 library(hablar) # Mantive pois você usou 'convert'
 
 # --- 1. CONFIGURAÇÃO ---
-caminho_real <- "K:/Meu Drive/Dados_Confidenciais/data_read_custo.Rdata"
+caminho_real <- "L:/Meu Drive/Dados_Confidenciais/data_read_custo.Rdata"
 
 if (!file.exists(caminho_real)) {
   stop("Arquivo Rdata de custos não encontrado!")

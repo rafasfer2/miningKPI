@@ -13,4 +13,13 @@ maint_track_dozer_mine_a
 \description{
 Log detalhado de OS de tratores de esteira (Infraestrutura).
 }
+\seealso{
+Other "Infraestrutura e Apoio": 
+\code{\link{drill_event_mine_a}},
+\code{\link{infra_water_truck_cost_plan}},
+\code{\link{infra_water_truck_events_mine_b}},
+\code{\link{infra_water_truck_hourmeter_mine_b}},
+\code{\link{infra_water_truck_task_list}}
+}
+\concept{"Infraestrutura e Apoio"}
 \keyword{datasets}

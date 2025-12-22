@@ -7,7 +7,7 @@ library(usethis)
 library(lubridate)
 
 # --- CONFIGURAÇÃO ---
-caminho_real <- "K:/Meu Drive/Dados_Confidenciais/paradas_completas_2022.xlsx"
+caminho_real <- "L:/Meu Drive/Dados_Confidenciais/paradas_completas_2022.xlsx"
 
 if (!file.exists(caminho_real)) {
   stop("Arquivo 'paradas_completas_2022.xlsx' não encontrado.")

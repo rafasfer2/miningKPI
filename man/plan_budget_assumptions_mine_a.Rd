@@ -17,4 +17,13 @@ plan_budget_assumptions_mine_a
 \description{
 Dados consolidados do orçamento (Budget) anual.
 }
+\seealso{
+Other "Gestão e Estratégia": 
+\code{\link{haul_kpi_monthly_mine_a}},
+\code{\link{meta_dictionary}},
+\code{\link{meta_event_classification}},
+\code{\link{plan_daily_budget_mine_c}},
+\code{\link{plan_daily_detailed_2021_mine_c}}
+}
+\concept{"Gestão e Estratégia"}
 \keyword{datasets}

@@ -13,4 +13,15 @@ maint_truck_pautas_mine_c
 \description{
 Histórico de Pautas (Mina C)
 }
+\seealso{
+Other "Confiabilidade e Manutenção": 
+\code{\link{haul_failure_log_mine_a}},
+\code{\link{haul_maint_costs_mine_a}},
+\code{\link{haul_maint_history_mine_a}},
+\code{\link{maint_orders_mine_b}},
+\code{\link{maint_stops_mine_b}},
+\code{\link{maint_truck_events_mine_c}},
+\code{\link{maint_truck_hourmeter_mine_c}}
+}
+\concept{"Confiabilidade e Manutenção"}
 \keyword{datasets}

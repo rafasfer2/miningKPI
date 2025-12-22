@@ -7,7 +7,7 @@ library(fs)
 library(usethis)
 
 # --- 1. CONFIGURAÇÃO ---
-caminho_real <- "K:/Meu Drive/Dados_Confidenciais/data_maintenance.Rdata"
+caminho_real <- "L:/Meu Drive/Dados_Confidenciais/data_maintenance.Rdata"
 
 if (!file.exists(caminho_real)) {
   stop("Arquivo data_maintenance.Rdata não encontrado!")

@@ -8,7 +8,7 @@ library(lubridate)
 library(usethis)
 
 # --- 1. CONFIGURAÇÃO ---
-caminho_real <- "K:/Meu Drive/Dados_Confidenciais/historico_frota_itabira_2020_2022.xlsx"
+caminho_real <- "L:/Meu Drive/Dados_Confidenciais/historico_frota_itabira_2020_2022.xlsx"
 
 if (!file.exists(caminho_real)) {
   stop("Arquivo Itabira não encontrado!")

@@ -13,4 +13,11 @@ haul_daily_summary_mine_c
 \description{
 Dados consolidados diários da frota de transporte.
 }
+\seealso{
+Other "Transporte e Ciclo": 
+\code{\link{drill_event_mine_a}},
+\code{\link{haul_cycle_mine_a}},
+\code{\link{haul_daily_cep_mine_b}}
+}
+\concept{"Transporte e Ciclo"}
 \keyword{datasets}

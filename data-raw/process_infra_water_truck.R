@@ -8,10 +8,10 @@ library(lubridate)
 library(usethis)
 
 # --- 1. CONFIGURAÇÃO ---
-path_events <- "K:/Meu Drive/Dados_Confidenciais/infra_water_truck_events.xlsx"
-path_hm     <- "K:/Meu Drive/Dados_Confidenciais/infra_water_truck_hourmeter.xlsx"
-path_cost   <- "K:/Meu Drive/Dados_Confidenciais/infra_water_truck_cost_plan.xlsx"
-path_tasks  <- "K:/Meu Drive/Dados_Confidenciais/infra_water_truck_task_list.xlsx"
+path_events <- "L:/Meu Drive/Dados_Confidenciais/infra_water_truck_events.xlsx"
+path_hm     <- "L:/Meu Drive/Dados_Confidenciais/infra_water_truck_hourmeter.xlsx"
+path_cost   <- "L:/Meu Drive/Dados_Confidenciais/infra_water_truck_cost_plan.xlsx"
+path_tasks  <- "L:/Meu Drive/Dados_Confidenciais/infra_water_truck_task_list.xlsx"
 
 if (!file.exists(path_events)) stop("Arquivo de eventos não encontrado!")
 

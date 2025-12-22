@@ -1,16 +1,26 @@
 Package: miningKPI
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Mining Operations and Reliability Analytics
+Version: 0.1.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Rafael", "da Silva Fernandes", , "rafasfer2@gmail.com", role = c("aut", "cre"))
+Description: Provides datasets and functions for calculating Key Performance Indicators (KPIs) in the mining industry. Includes tools for Overall Equipment Effectiveness (OEE), Reliability Engineering (MTBF, MTTR), and Asset Management. Contains anonymized real-world datasets from Iron Ore and Copper operations (Mina A, B, C, and D).
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Depends: 
-    R (>= 3.5)
+    R (>= 3.5.0)
+Imports: 
+    dplyr,
+    ggplot2,
+    lubridate,
+    janitor,
+    readxl,
+    stringr,
+    rlang,
+    tidyr,
+    magrittr
 LazyData: true
+LazyDataCompression: xz
 URL: https://github.com/rafasfer2/miningKPI
 BugReports: https://github.com/rafasfer2/miningKPI/issues

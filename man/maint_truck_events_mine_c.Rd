@@ -3,8 +3,7 @@
 \docType{data}
 \name{maint_truck_events_mine_c}
 \alias{maint_truck_events_mine_c}
-\title{Histórico de Manutenção Preventiva (Mina C)
-Case de Otimização de Periodicidade.}
+\title{Histórico de Manutenção Preventiva (Mina C)}
 \format{
 Tibble de eventos.
 }
@@ -12,7 +11,17 @@ Tibble de eventos.
 maint_truck_events_mine_c
 }
 \description{
-Histórico de Manutenção Preventiva (Mina C)
 Case de Otimização de Periodicidade.
 }
+\seealso{
+Other "Confiabilidade e Manutenção": 
+\code{\link{haul_failure_log_mine_a}},
+\code{\link{haul_maint_costs_mine_a}},
+\code{\link{haul_maint_history_mine_a}},
+\code{\link{maint_orders_mine_b}},
+\code{\link{maint_stops_mine_b}},
+\code{\link{maint_truck_hourmeter_mine_c}},
+\code{\link{maint_truck_pautas_mine_c}}
+}
+\concept{"Confiabilidade e Manutenção"}
 \keyword{datasets}
