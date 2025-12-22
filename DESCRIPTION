@@ -12,9 +12,7 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     dplyr,
-    ggplot2,
     lubridate,
-    janitor,
     readxl,
     stringr,
     rlang,

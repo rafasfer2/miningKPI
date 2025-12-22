@@ -9,23 +9,12 @@ load_summarize_performance(data, per)
 \arguments{
 \item{data}{A tibble, typically \code{load_cycle_mine_a}.}
 
-\item{per}{The dimension for grouping. Can be a column name (e.g., fleet_id)
-or a string for time grouping ("day", "week", "month").}
+\item{per}{The dimension for grouping (e.g., fleet_load_id, "day").}
 }
 \value{
 A summarized tibble with standardized mining KPIs.
 }
 \description{
-Calculates KPIs for loading operations. It supports grouping by specific
-columns or by time intervals (day, week, month) using the 'per' argument.
-}
-\examples{
-library(miningKPI)
-library(dplyr)
-
-# 1. Analysis by Fleet
-load_summarize_performance(data = load_cycle_mine_a, per = fleet_id)
-
-# 2. Temporal Analysis by Day
-load_summarize_performance(data = load_cycle_mine_a, per = "day")
+Calculates KPIs for loading operations based on standard mining metrics.
+Supports grouping by columns or time intervals (day, week, month).
 }
