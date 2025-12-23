@@ -1,15 +1,15 @@
 #' Summarize Loading Performance Indicators
 #'
 #' @description
-#' Calculates KPIs for loading operations based on standard mining metrics.
-#' Supports grouping by columns or time intervals (day, week, month).
+#' Calculates KPIs for loading operations based on the fundamental identity
+#' Xi = Mi + Di + Oi. Supports grouping by specific columns or time intervals.
 #'
-#' @param data A tibble, typically `load_cycle_mine_a`.
-#' @param per The dimension for grouping (e.g., fleet_load_id, "day").
+#' @param data A tibble, containing columns: exit_time, payload, lct, mct, oct.
+#' @param per The dimension for grouping (e.g., fleet_id, "day", "week").
 #'
-#' @return A summarized tibble with standardized mining KPIs.
+#' @return A summarized tibble with standardized mining KPIs: TPL, WH, MLCT, MOCT, MTBC, LP, LC.
 #'
-#' @importFrom dplyr mutate group_by summarise n rename case_when .data
+#' @importFrom dplyr mutate group_by summarise n rename case_when select .data
 #' @importFrom magrittr %>%
 #' @importFrom rlang enquo as_label := !!
 #' @importFrom lubridate floor_date
@@ -17,57 +17,54 @@
 #' @export
 load_summarize_performance <- function(data, per) {
 
-  # 1. Handle Time Grouping vs Column Grouping
-  group_var <- enquo(per)
-  group_label <- as_label(group_var)
+  # 1. Captura da variável de agrupamento
+  group_var <- rlang::enquo(per)
+  group_label <- rlang::as_label(group_var)
 
+  # 2. Preparação dos dados e tratamento de tempo
+  # Criamos a coluna temporal apenas se 'per' for uma das palavras-chave de tempo
   processed_data <- data %>%
-    mutate(
-      period = case_when(
+    dplyr::mutate(
+      group_col = dplyr::case_when(
         group_label == "day"   ~ as.character(as.Date(.data$exit_time)),
         group_label == "week"  ~ as.character(lubridate::floor_date(.data$exit_time, "week")),
         group_label == "month" ~ as.character(lubridate::floor_date(.data$exit_time, "month")),
         TRUE                   ~ as.character(!!group_var)
-      )
+      ),
+      # Identidade Fundamental Individual: Xi = Mi + Di + Oi
+      xi = .data$mct + .data$lct + .data$oct
     )
 
-  # 2. Calculate Indicators based on Normative Table
-  processed_data %>%
-    group_by(.data$period) %>%
-    summarise(
-      # 175. Total Production Load (TPL) - Mass Loaded
+  # 3. Sumarização baseada nas fórmulas do livro
+  summary_table <- processed_data %>%
+    dplyr::group_by(.data$group_col) %>%
+    dplyr::summarise(
+      # Massa Total Carregada (TPL)
       TPL = sum(.data$payload, na.rm = TRUE),
 
-      # 188. Mean Loading Cycle Time (MLCT) - TMC/Average Loading Time
+      # Horas Trabalhadas (WH) - Soma dos Xi convertida para horas
+      WH = sum(.data$xi, na.rm = TRUE) / 60,
+
+      # Tempo Médio de Carregamento (MLCT) - Média de Di
       MLCT = mean(.data$lct, na.rm = TRUE),
 
-      # 444. Operational Cycle Time (OCT) - Excavator Idleness
-      # Represented as the average idle time per cycle
-      OCT = mean(.data$oct, na.rm = TRUE),
+      # Ociosidade Média (MOCT) - Média de Oi
+      MOCT = mean(.data$oct, na.rm = TRUE),
 
-      # Mean Maneuver Time
-      avg_mct = mean(.data$mct, na.rm = TRUE),
+      # Tempo Médio entre Composições (MTBC) - Média de Xi
+      MTBC = mean(.data$xi, na.rm = TRUE),
 
-      # 166. Mean Time Between Compositions (MTBC) - Loading Cycle Time
-      # MTBC = Maneuver + Loading + Idle
-      MTBC = .data$MLCT + .data$avg_mct + .data$OCT,
+      # Produtividade de Carregamento (LP) - TPL / WH
+      LP = ifelse(.data$WH > 0, .data$TPL / .data$WH, 0),
 
-      # Worked Hours (WH) - Sum of cycle times converted to hours
-      WH = sum(.data$lct + .data$mct + .data$oct, na.rm = TRUE) / 60,
+      # Capacidade de Carga (LC) - Total movimentado (Ore + Waste)
+      LC = sum(.data$payload, na.rm = TRUE),
 
-      # 177. Loading Productivity (LP) - Loading Throughput
-      # LP = TPL / WH
-      LP = .data$TPL / .data$WH,
-
-      # 634. Load Capacity (LC) - Total Ore + Waste
-      # (Note: In a summarized view, this is equivalent to TPL)
-      LC = .data$TPL,
-
-      n_cycles = n(),
+      n_cycles = dplyr::n(),
       .groups = "drop"
     ) %>%
-    # Remove auxiliary mean maneuver for clean output
-    select(-"avg_mct") %>%
-    # Rename 'period' back to the name used in 'per' for clarity
-    rename(!!group_label := .data$period)
+    # Renomeia a coluna de agrupamento de volta para o nome original (ex: "day" ou "fleet_id")
+    dplyr::rename(!!group_label := .data$group_col)
+
+  return(summary_table)
 }

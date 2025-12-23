@@ -7,14 +7,14 @@
 load_summarize_performance(data, per)
 }
 \arguments{
-\item{data}{A tibble, typically \code{load_cycle_mine_a}.}
+\item{data}{A tibble, containing columns: exit_time, payload, lct, mct, oct.}
 
-\item{per}{The dimension for grouping (e.g., fleet_load_id, "day").}
+\item{per}{The dimension for grouping (e.g., fleet_id, "day", "week").}
 }
 \value{
-A summarized tibble with standardized mining KPIs.
+A summarized tibble with standardized mining KPIs: TPL, WH, MLCT, MOCT, MTBC, LP, LC.
 }
 \description{
-Calculates KPIs for loading operations based on standard mining metrics.
-Supports grouping by columns or time intervals (day, week, month).
+Calculates KPIs for loading operations based on the fundamental identity
+Xi = Mi + Di + Oi. Supports grouping by specific columns or time intervals.
 }
