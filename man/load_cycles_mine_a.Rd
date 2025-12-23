@@ -3,30 +3,31 @@
 \docType{data}
 \name{load_cycles_mine_a}
 \alias{load_cycles_mine_a}
-\title{Mine A Loading Cycles (Aggregated + Inoperable)}
+\title{Mine A Loading Cycles (Aggregated)}
 \format{
-A tibble with 12 columns:
+Um tibble com 15 colunas:
 \describe{
-\item{first_time}{Start of the cycle (Maneuver start).}
-\item{exit_time}{End of the cycle (Departure from face).}
-\item{duration_min}{Total cycle time ($X_i$) including gaps.}
-\item{fleet_id}{Loading fleet category.}
-\item{load_id}{Anonymized loading unit ID.}
-\item{haul_id}{Anonymized truck ID (NA for inoperable).}
-\item{origin}{Loading location.}
-\item{material}{Material type.}
-\item{payload}{Total tonnes loaded in the cycle.}
-\item{load_status}{Status (Target Met, Acceptable, Inoperable, etc.).}
-\item{m_time}{Specific duration for maneuver ($M_i$).}
-\item{l_time}{Specific duration for loading ($D_i$).}
-\item{i_time}{Specific duration for operational idle ($O_i$).}
+\item{cycle_id}{Identificador sequencial único do ciclo por escavadeira.}
+\item{first_time}{Timestamp de início do ciclo (início da manobra).}
+\item{exit_time}{Timestamp de término do ciclo (partida do caminhão).}
+\item{duration_min}{Tempo total do ciclo (Xi) em minutos, calculado pela soma de Mi, Di e Oi.}
+\item{load_fleet}{Categoria da frota de carga (ex: Hydraulic Excavator - Large Class).}
+\item{haul_fleet}{Categoria da frota de transporte atendida (ex: 240t Class A).}
+\item{load_id}{ID anonimizado da unidade de carga.}
+\item{haul_id}{ID anonimizado do caminhão atendido.}
+\item{origin}{Local de origem do material.}
+\item{material}{Tipo de material (Ore/Waste).}
+\item{payload}{Total de toneladas carregadas no ciclo.}
+\item{load_status}{Status qualitativo da carga (Target Met, Acceptable, Underload, etc.).}
+\item{m_time}{Duração específica da manobra de posicionamento (Mi).}
+\item{l_time}{Duração específica do carregamento efetivo (Di).}
+\item{i_time}{Duração da ociosidade operacional aguardando transporte (Oi).}
 }
 }
 \usage{
 load_cycles_mine_a
 }
 \description{
-A wide-format dataset where each row is a full loading cycle. It includes
-"Inoperable" bridge rows to account for equipment downtime.
+Um conjunto de dados em formato largo onde cada linha representa um ciclo completo de carregamento.
 }
 \keyword{datasets}

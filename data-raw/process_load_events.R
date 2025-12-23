@@ -1,12 +1,13 @@
-# --- IMPORTAÇÃO DOS DADOS PROCESSADOS DO PROJETO PRIVADO ---
+# --- INTEGRAÇÃO DE DATASETS: miningKPI ---
 
-# 1. Carrega os dados gerados pelo projeto 'scripts_miningKPI'
-# Certifique-se de ajustar o caminho relativo ou absoluto corretamente
-load("C:/Projetos/scripts_miningKPI/data/processed_load_mine_a_data.Rdata")
+# 1. Carregamento dos dados processados (contendo as 4 entidades fundamentais)
+# Certifique-se de que o arquivo .RData contém os objetos nomeados conforme abaixo
+load("C:/Projetos/scripts_miningKPI/data/processed_mining_data.RData")
 
-# 2. Disponibiliza os objetos no pacote 'miningKPI'
+# 2. Registro oficial dos dados no pacote com compressão xz para otimização
 usethis::use_data(load_events_mine_a, overwrite = TRUE, compress = "xz")
 usethis::use_data(load_cycles_mine_a, overwrite = TRUE, compress = "xz")
 usethis::use_data(haul_events_mine_a, overwrite = TRUE, compress = "xz")
+usethis::use_data(haul_cycles_mine_a, overwrite = TRUE, compress = "xz")
 
-message(">>> Datasets da Mina A integrados ao pacote miningKPI com sucesso!")
+message(">>> Datasets integrados: load_events, load_cycles, haul_events e haul_cycles.")

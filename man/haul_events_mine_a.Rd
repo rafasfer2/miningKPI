@@ -5,22 +5,24 @@
 \alias{haul_events_mine_a}
 \title{Mine A Hauling Events (Full Journey)}
 \format{
-A tibble with the full hauling journey events:
+Um tibble em formato longo:
 \describe{
-\item{load_id}{ID of the excavator providing the load.}
-\item{haul_id}{ID of the truck performing the transport.}
-\item{origin}{Extraction point.}
-\item{destination}{Dump point (Crusher or Stockpile).}
-\item{event_type}{One of 7 states: queue_at_load, maneuver_at_load, loading, travel_full, queue_at_dump, maneuver_at_dump, dumping.}
-\item{duration_min}{Time spent in each state.}
-\item{payload}{Mass transported ($L_i$).}
+\item{cycle_id}{ID de referência para o ciclo de transporte correspondente.}
+\item{load_id}{ID da unidade de carga que realizou o atendimento.}
+\item{haul_id}{ID do caminhão que realiza o transporte.}
+\item{haul_fleet}{Classificação técnica da frota de transporte (ex: 320t Class B).}
+\item{origin}{Ponto de extração/origem.}
+\item{destination}{Ponto de descarga (Crusher, Waste Dump, Stockpile, etc.).}
+\item{event_type}{Um dos 7 estados: queue_at_load, maneuver_at_load, loading, travel_full, queue_at_dump, maneuver_at_dump, dumping.}
+\item{duration_min}{Tempo despendido em cada estado individual em minutos.}
+\item{payload}{Massa transportada em toneladas.}
 }
 }
 \usage{
 haul_events_mine_a
 }
 \description{
-A detailed dataset containing the 7-event hauling cycle, from loading queue
-to return trip.
+Conjunto de dados detalhado contendo a jornada de 7 eventos do ciclo de transporte.
+Abrange desde a fila no carregamento até a conclusão da viagem de retorno.
 }
 \keyword{datasets}

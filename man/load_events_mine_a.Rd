@@ -5,26 +5,26 @@
 \alias{load_events_mine_a}
 \title{Mine A Loading Events (Base Notation)}
 \format{
-A tibble with 11 columns:
+Um tibble com 9 colunas:
 \describe{
-\item{first_time}{Start of the specific event (maneuver, loading, or idle).}
-\item{exit_time}{End of the specific event (Exit Time - $T_i$).}
-\item{fleet_id}{International classification of the loading equipment.}
-\item{load_id}{Anonymized identifier for the loading unit.}
-\item{haul_id}{Anonymized identifier for the hauling unit (NA for idle).}
-\item{origin}{Loading face location (Bench, Stockpile, or Rehandling).}
-\item{material}{Type of material: Ore or Waste.}
-\item{payload}{Loaded mass ($L_i$) in tonnes. Recorded only during 'loading'.}
-\item{load_status}{Qualitative status of the load (e.g., Target Met, Underload).}
-\item{event_type}{The operational state: maneuver, loading, or idle.}
-\item{duration_min}{Event duration in decimal minutes.}
+\item{cycle_id}{Identificador único do ciclo de carregamento, permitindo a conexão com o banco de ciclos.}
+\item{first_time}{Timestamp de início do evento específico (maneuver, loading ou idle).}
+\item{exit_time}{Timestamp de término do evento específico (Exit Time - Ti).}
+\item{load_fleet}{Classificação técnica internacional do equipamento de carga (ex: Electric Shovel).}
+\item{load_id}{Identificador anonimizado da unidade de carregamento.}
+\item{haul_id}{Identificador anonimizado da unidade de transporte atendida (NA para estados idle).}
+\item{origin}{Localização da frente de lavra (Bench, Stockpile ou Rehandling).}
+\item{material}{Tipo de material movimentado: Ore (Minério) ou Waste (Estéril).}
+\item{payload}{Massa carregada (Li) em toneladas. Registrada apenas durante o evento 'loading'.}
+\item{event_type}{O estado operacional atual: maneuver (manobra), loading (carga) ou idle (ocioso).}
+\item{duration_min}{Duração do evento em minutos decimais.}
 }
 }
 \usage{
 load_events_mine_a
 }
 \description{
-A tidy, long-format dataset representing the stochastic process of loading.
-It contains the three fundamental states for each composition.
+Um conjunto de dados tidy, em formato longo, representando o processo estocástico de carregamento.
+Contém os três estados fundamentais para cada composição atendida pela unidade de carga.
 }
 \keyword{datasets}
