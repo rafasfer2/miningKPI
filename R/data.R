@@ -1,91 +1,145 @@
-#' Mine A Loading Events (Base Notation)
+#' Mine A Loading Events (Base Notation) / Eventos de Carregamento - Mina A
 #'
-#' Um conjunto de dados tidy, em formato longo, representando o processo estocástico de carregamento.
-#' Contém os três estados fundamentais para cada composição atendida pela unidade de carga.
+#' English: A tidy, long-format dataset representing the stochastic loading process.
+#' It contains the three fundamental states for each composition served by the loading unit.
 #'
-#' @format Um tibble com 9 colunas:
+#' Português: Um conjunto de dados tidy, em formato longo, representando o processo
+#' estocástico de carregamento. Contém os três estados fundamentais para cada
+#' composição atendida pela unidade de carga.
+#'
+#' @format A tibble with 11 columns / Um tibble com 11 colunas:
 #' \describe{
-#'   \item{cycle_id}{Identificador único do ciclo de carregamento, permitindo a conexão com o banco de ciclos.}
-#'   \item{first_time}{Timestamp de início do evento específico (maneuver, loading ou idle).}
-#'   \item{exit_time}{Timestamp de término do evento específico (Exit Time - Ti).}
-#'   \item{load_fleet}{Classificação técnica internacional do equipamento de carga (ex: Electric Shovel).}
-#'   \item{load_id}{Identificador anonimizado da unidade de carregamento.}
-#'   \item{haul_id}{Identificador anonimizado da unidade de transporte atendida (NA para estados idle).}
-#'   \item{origin}{Localização da frente de lavra (Bench, Stockpile ou Rehandling).}
-#'   \item{material}{Tipo de material movimentado: Ore (Minério) ou Waste (Estéril).}
-#'   \item{payload}{Massa carregada (Li) em toneladas. Registrada apenas durante o evento 'loading'.}
-#'   \item{event_type}{O estado operacional atual: maneuver (manobra), loading (carga) ou idle (ocioso).}
-#'   \item{duration_min}{Duração do evento em minutos decimais.}
+#'   \item{cycle_id}{Unique identifier for the loading cycle / Identificador único do ciclo de carregamento.}
+#'   \item{first_time}{Start timestamp of the event / Timestamp de início do evento específico.}
+#'   \item{exit_time}{End timestamp of the event ($T_i$) / Timestamp de término do evento específico.}
+#'   \item{load_fleet}{Technical equipment class / Classificação técnica internacional do equipamento de carga.}
+#'   \item{load_id}{Anonymized loading unit ID / Identificador anonimizado da unidade de carregamento.}
+#'   \item{haul_id}{Anonymized hauling unit ID / Identificador anonimizado da unidade de transporte atendida.}
+#'   \item{origin}{Loading location / Localização da frente de lavra (Bench, Stockpile ou Rehandling).}
+#'   \item{material}{Type of material: Ore or Waste / Tipo de material movimentado: Minério ou Estéril.}
+#'   \item{payload}{Loaded mass ($L_i$) in tons / Massa carregada em toneladas.}
+#'   \item{event_type}{Operational state: maneuver, loading, or idle / Estado operacional: manobra, carga ou ocioso.}
+#'   \item{duration_min}{Event duration in decimal minutes / Duração do evento em minutos decimais.}
 #' }
 "load_events_mine_a"
 
-#' Mine A Loading Cycles (Aggregated)
+#' Mine A Loading Cycles (Aggregated) / Ciclos de Carregamento - Mina A
 #'
-#' Um conjunto de dados em formato largo onde cada linha representa um ciclo completo de carregamento.
+#' English: Aggregated dataset where each row represents a complete loading cycle ($X_i$).
 #'
-#' @format Um tibble com 15 colunas:
+#' Português: Um conjunto de dados em formato largo onde cada linha representa um
+#' ciclo completo de carregamento.
+#'
+#' @format A tibble with 15 columns / Um tibble com 15 colunas:
 #' \describe{
-#'   \item{cycle_id}{Identificador sequencial único do ciclo por escavadeira.}
-#'   \item{first_time}{Timestamp de início do ciclo (início da manobra).}
-#'   \item{exit_time}{Timestamp de término do ciclo (partida do caminhão).}
-#'   \item{duration_min}{Tempo total do ciclo (Xi) em minutos, calculado pela soma de Mi, Di e Oi.}
-#'   \item{load_fleet}{Categoria da frota de carga (ex: Hydraulic Excavator - Large Class).}
-#'   \item{haul_fleet}{Categoria da frota de transporte atendida (ex: 240t Class A).}
-#'   \item{load_id}{ID anonimizado da unidade de carga.}
-#'   \item{haul_id}{ID anonimizado do caminhão atendido.}
-#'   \item{origin}{Local de origem do material.}
-#'   \item{material}{Tipo de material (Ore/Waste).}
-#'   \item{payload}{Total de toneladas carregadas no ciclo.}
-#'   \item{load_status}{Status qualitativo da carga (Target Met, Acceptable, Underload, etc.).}
-#'   \item{m_time}{Duração específica da manobra de posicionamento (Mi).}
-#'   \item{l_time}{Duração específica do carregamento efetivo (Di).}
-#'   \item{i_time}{Duração da ociosidade operacional aguardando transporte (Oi).}
+#'   \item{cycle_id}{Unique sequential cycle identifier / Identificador sequencial único do ciclo por escavadeira.}
+#'   \item{first_time}{Cycle start timestamp (maneuver start) / Timestamp de início do ciclo (início da manobra).}
+#'   \item{exit_time}{Cycle end timestamp (truck departure) / Timestamp de término do ciclo (partida do caminhão).}
+#'   \item{duration_min}{Total cycle time ($X_i$) / Tempo total do ciclo em minutos (soma de Mi, Di e Oi).}
+#'   \item{load_fleet}{Loading fleet category / Categoria da frota de carga.}
+#'   \item{haul_fleet}{Hauling fleet category / Categoria da frota de transporte atendida.}
+#'   \item{load_id}{Anonymized loading unit ID / ID anonimizado da unidade de carga.}
+#'   \item{haul_id}{Anonymized hauling unit ID / ID anonimizado do caminhão atendido.}
+#'   \item{origin}{Material origin location / Local de origem do material.}
+#'   \item{material}{Material type (Ore/Waste) / Tipo de material (Minério/Estéril).}
+#'   \item{payload}{Total cycle tonnage / Total de toneladas carregadas no ciclo.}
+#'   \item{load_status}{Qualitative load status / Status qualitativo da carga (Target Met, Underload, etc.).}
+#'   \item{m_time}{Specific maneuver duration ($M_i$) / Duração específica da manobra de posicionamento.}
+#'   \item{l_time}{Effective loading duration ($D_i$) / Duração do carregamento efetivo.}
+#'   \item{i_time}{Operational idle duration ($O_i$) / Duração da ociosidade operacional.}
 #' }
 "load_cycles_mine_a"
 
-#' Mine A Hauling Events (Full Journey)
+#' Mine A Hauling Events (Full Journey) / Eventos de Transporte - Mina A
 #'
-#' Conjunto de dados detalhado contendo a jornada de 7 eventos do ciclo de transporte.
-#' Abrange desde a fila no carregamento até a conclusão da viagem de retorno.
+#' English: Detailed dataset containing the 7-event journey of the hauling cycle.
 #'
-#' @format Um tibble em formato longo:
+#' Português: Conjunto de dados detalhado contendo a jornada de 7 eventos do ciclo
+#' de transporte.
+#'
+#' @format A tibble in long format / Um tibble em formato longo:
 #' \describe{
-#'   \item{cycle_id}{ID de referência para o ciclo de transporte correspondente.}
-#'   \item{load_id}{ID da unidade de carga que realizou o atendimento.}
-#'   \item{haul_id}{ID do caminhão que realiza o transporte.}
-#'   \item{haul_fleet}{Classificação técnica da frota de transporte (ex: 320t Class B).}
-#'   \item{origin}{Ponto de extração/origem.}
-#'   \item{destination}{Ponto de descarga (Crusher, Waste Dump, Stockpile, etc.).}
-#'   \item{event_type}{Um dos 7 estados: queue_at_load, maneuver_at_load, loading, travel_full, queue_at_dump, maneuver_at_dump, dumping.}
-#'   \item{duration_min}{Tempo despendido em cada estado individual em minutos.}
-#'   \item{payload}{Massa transportada em toneladas.}
+#'   \item{cycle_id}{Reference ID for the hauling cycle / ID de referência para o ciclo de transporte.}
+#'   \item{load_id}{ID of the serving loading unit / ID da unidade de carga que realizou o atendimento.}
+#'   \item{haul_id}{Truck identifier / ID do caminhão que realiza o transporte.}
+#'   \item{haul_fleet}{Technical hauling fleet class / Classificação técnica da frota de transporte.}
+#'   \item{origin}{Extraction point / Ponto de extração/origem.}
+#'   \item{destination}{Dump point / Ponto de descarga (Crusher, Waste Dump, etc.).}
+#'   \item{event_type}{The 7 operational states / Um dos 7 estados: queue_at_load, maneuver_at_load, loading, travel_full, queue_at_dump, maneuver_at_dump, dumping.}
+#'   \item{duration_min}{Duration of each individual state / Tempo despendido em cada estado individual em minutos.}
+#'   \item{payload}{Transported mass in tons / Massa transportada em toneladas.}
 #' }
 "haul_events_mine_a"
 
-#' Mine A Hauling Cycles (Performance & Scale)
+#' Mine A Hauling Cycles (Performance & Scale) / Ciclos de Transporte - Mina A
 #'
-#' Dataset consolidado onde cada linha representa uma viagem completa, incluindo variáveis
-#' de distância (DMT), conformidade de balança e fatores de carga.
+#' English: Consolidated dataset of haul trips including DMT and scale compliance.
 #'
-#' @format Um tibble em formato largo com as métricas de performance:
+#' Português: Dataset consolidado onde cada linha representa uma viagem completa,
+#' incluindo variáveis de distância (DMT) e balança.
+#'
+#' @format A tibble with performance metrics / Um tibble com 18 colunas:
 #' \describe{
-#'   \item{cycle_id}{Identificador único do ciclo de transporte.}
-#'   \item{first_time}{Início da jornada (entrada na fila de carga).}
-#'   \item{exit_time}{Término da jornada (conclusão da descarga).}
-#'   \item{duration_min}{Duração total da viagem (Xj).}
-#'   \item{load_fleet}{Frota que realizou o carregamento.}
-#'   \item{haul_fleet}{Frota que realizou o transporte (segregada por fabricante/classe).}
-#'   \item{payload}{Massa carregada registrada pelo sensor do caminhão (Tons).}
-#'   \item{scale_weight}{Massa real registrada pela balança fixa de conferência.}
-#'   \item{scale_ok}{Variável lógica indicando se a pesagem da balança foi validada.}
-#'   \item{load_status}{Classificação de conformidade da carga.}
-#'   \item{load_factor}{Fator de preenchimento/enchimento da caçamba.}
-#'   \item{dmt_full}{Distância média de transporte carregado (km).}
-#'   \item{dmt_empty}{Distância média de transporte vazio (km).}
-#'   \item{dmt_total}{Soma das distâncias de ida e volta (km).}
-#'   \item{m_time}{Tempo consolidado de manobras (Carga + Descarga).}
-#'   \item{l_time}{Tempo de carregamento efetivo.}
-#'   \item{d_time}{Tempo de descarga efetiva.}
-#'   \item{q_time}{Tempo total em fila (Carga + Descarga).}
+#'   \item{cycle_id}{Unique journey identifier / Identificador único do ciclo de transporte.}
+#'   \item{first_time}{Start of journey (load queue entry) / Início da jornada (entrada na fila de carga).}
+#'   \item{exit_time}{End of journey (dump completion) / Término da jornada (conclusão da descarga).}
+#'   \item{duration_min}{Total journey duration ($X_j$) / Duração total da viagem.}
+#'   \item{load_fleet}{Fleet that performed the loading / Frota que realizou o carregamento.}
+#'   \item{haul_fleet}{Fleet that performed the hauling / Frota que realizou o transporte.}
+#'   \item{payload}{Truck sensor registered mass / Massa carregada registrada pelo sensor do caminhão.}
+#'   \item{scale_weight}{Stationary scale registered mass / Massa real registrada pela balança fixa.}
+#'   \item{scale_ok}{Logical scale validation / Variável lógica indicando se a pesagem foi validada.}
+#'   \item{load_status}{Load compliance classification / Classificação de conformidade da carga.}
+#'   \item{load_factor}{Bucket fill factor / Fator de preenchimento da caçamba.}
+#'   \item{dmt_full}{Average full haul distance / Distância média de transporte carregado (km).}
+#'   \item{dmt_empty}{Average empty haul distance / Distância média de transporte vazio (km).}
+#'   \item{dmt_total}{Total cycle distance / Soma das distâncias de ida e volta (km).}
+#'   \item{m_time}{Consolidated maneuver time / Tempo consolidado de manobras (Carga + Descarga).}
+#'   \item{l_time}{Effective loading time / Tempo de carregamento efetivo.}
+#'   \item{d_time}{Effective dumping time / Tempo de descarga efetiva.}
+#'   \item{q_time}{Total queue time / Tempo total em fila (Carga + Descarga).}
 #' }
 "haul_cycles_mine_a"
+
+#' Drilling Micro-Events (Sossego 2023) / Eventos Micro de Perfuração
+#'
+#' English: Treated and anonymized drill rig telemetry with production allocation.
+#'
+#' Português: Dataset contendo a telemetria tratada e anonimizada das perfuratrizes
+#' com rateio proporcional de produção.
+#'
+#' @format A tibble with 9 columns / Um tibble com 9 colunas:
+#' \describe{
+#'   \item{drill_id}{Anonymized equipment ID / ID anonimizado do equipamento.}
+#'   \item{drill_fleet}{Technical fleet class / Classificação técnica da frota.}
+#'   \item{origin}{Standardized pit region / Região da mina padronizada.}
+#'   \item{event_type}{Fundamental event type / Tipo de evento (drilling, setup, tramming, rods, inoperable).}
+#'   \item{category}{Operational category / Categoria operacional (HEF = Efetivas, HOI = Inoperante).}
+#'   \item{duration_min}{Calculated duration / Duração do evento em minutos (via dhours).}
+#'   \item{allocated_meters}{Allocated production / Produção estimada do evento (Rateio Proporcional).}
+#'   \item{first_time}{Event start timestamp / Timestamp inicial do evento.}
+#'   \item{exit_time}{Corrected end timestamp / Timestamp final corrigido.}
+#' }
+"drill_events_mine_d"
+
+#' Drilling Cycles (Reconciled) / Ciclos de Perfuração Reconciliados
+#'
+#' English: Daily consolidated data crossing Micro Cycle ($X_i$) vs Macro Closing.
+#'
+#' Português: Dataset diário por equipamento que cruza a Identidade Fundamental do
+#' Ciclo ($X_i$) com o fechamento oficial (Requipam).
+#'
+#' @format A tibble with 10 columns / Um tibble com 10 colunas:
+#' \describe{
+#'   \item{drill_id}{Anonymized equipment ID / ID anonimizado do equipamento.}
+#'   \item{date}{Operational reference date / Data de referência operacional.}
+#'   \item{xi_min}{Sum of cycle times ($P+D+H+M$) / Soma dos tempos do ciclo em minutos.}
+#'   \item{p_time}{Total daily setup time / Tempo total de Setup no dia.}
+#'   \item{d_time}{Total daily drilling time / Tempo total de Perfuração Efetiva no dia.}
+#'   \item{allocated_meters}{Sum of allocated production / Soma da produção alocada.}
+#'   \item{ho_off}{Official Operating Hours / Horas Operativas Oficiais (Macro).}
+#'   \item{hm_off}{Official Maintenance Hours / Horas de Manutenção Oficiais.}
+#'   \item{prod_day}{Official total daily meters / Produção total do dia em metros (Oficial).}
+#'   \item{delta_ho}{Gap between Xi and official HO / Diferença entre o ciclo (Xi) e o oficial.}
+#' }
+"drill_cycles_mine_d"

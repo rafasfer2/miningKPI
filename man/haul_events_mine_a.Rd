@@ -3,26 +3,29 @@
 \docType{data}
 \name{haul_events_mine_a}
 \alias{haul_events_mine_a}
-\title{Mine A Hauling Events (Full Journey)}
+\title{Mine A Hauling Events (Full Journey) / Eventos de Transporte - Mina A}
 \format{
-Um tibble em formato longo:
+A tibble in long format / Um tibble em formato longo:
 \describe{
-\item{cycle_id}{ID de referência para o ciclo de transporte correspondente.}
-\item{load_id}{ID da unidade de carga que realizou o atendimento.}
-\item{haul_id}{ID do caminhão que realiza o transporte.}
-\item{haul_fleet}{Classificação técnica da frota de transporte (ex: 320t Class B).}
-\item{origin}{Ponto de extração/origem.}
-\item{destination}{Ponto de descarga (Crusher, Waste Dump, Stockpile, etc.).}
-\item{event_type}{Um dos 7 estados: queue_at_load, maneuver_at_load, loading, travel_full, queue_at_dump, maneuver_at_dump, dumping.}
-\item{duration_min}{Tempo despendido em cada estado individual em minutos.}
-\item{payload}{Massa transportada em toneladas.}
+\item{cycle_id}{Reference ID for the hauling cycle / ID de referência para o ciclo de transporte.}
+\item{load_id}{ID of the serving loading unit / ID da unidade de carga que realizou o atendimento.}
+\item{haul_id}{Truck identifier / ID do caminhão que realiza o transporte.}
+\item{haul_fleet}{Technical hauling fleet class / Classificação técnica da frota de transporte.}
+\item{origin}{Extraction point / Ponto de extração/origem.}
+\item{destination}{Dump point / Ponto de descarga (Crusher, Waste Dump, etc.).}
+\item{event_type}{The 7 operational states / Um dos 7 estados: queue_at_load, maneuver_at_load, loading, travel_full, queue_at_dump, maneuver_at_dump, dumping.}
+\item{duration_min}{Duration of each individual state / Tempo despendido em cada estado individual em minutos.}
+\item{payload}{Transported mass in tons / Massa transportada em toneladas.}
 }
 }
 \usage{
 haul_events_mine_a
 }
 \description{
-Conjunto de dados detalhado contendo a jornada de 7 eventos do ciclo de transporte.
-Abrange desde a fila no carregamento até a conclusão da viagem de retorno.
+English: Detailed dataset containing the 7-event journey of the hauling cycle.
+}
+\details{
+Português: Conjunto de dados detalhado contendo a jornada de 7 eventos do ciclo
+de transporte.
 }
 \keyword{datasets}

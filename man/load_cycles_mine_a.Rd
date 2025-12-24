@@ -3,31 +3,35 @@
 \docType{data}
 \name{load_cycles_mine_a}
 \alias{load_cycles_mine_a}
-\title{Mine A Loading Cycles (Aggregated)}
+\title{Mine A Loading Cycles (Aggregated) / Ciclos de Carregamento - Mina A}
 \format{
-Um tibble com 15 colunas:
+A tibble with 15 columns / Um tibble com 15 colunas:
 \describe{
-\item{cycle_id}{Identificador sequencial único do ciclo por escavadeira.}
-\item{first_time}{Timestamp de início do ciclo (início da manobra).}
-\item{exit_time}{Timestamp de término do ciclo (partida do caminhão).}
-\item{duration_min}{Tempo total do ciclo (Xi) em minutos, calculado pela soma de Mi, Di e Oi.}
-\item{load_fleet}{Categoria da frota de carga (ex: Hydraulic Excavator - Large Class).}
-\item{haul_fleet}{Categoria da frota de transporte atendida (ex: 240t Class A).}
-\item{load_id}{ID anonimizado da unidade de carga.}
-\item{haul_id}{ID anonimizado do caminhão atendido.}
-\item{origin}{Local de origem do material.}
-\item{material}{Tipo de material (Ore/Waste).}
-\item{payload}{Total de toneladas carregadas no ciclo.}
-\item{load_status}{Status qualitativo da carga (Target Met, Acceptable, Underload, etc.).}
-\item{m_time}{Duração específica da manobra de posicionamento (Mi).}
-\item{l_time}{Duração específica do carregamento efetivo (Di).}
-\item{i_time}{Duração da ociosidade operacional aguardando transporte (Oi).}
+\item{cycle_id}{Unique sequential cycle identifier / Identificador sequencial único do ciclo por escavadeira.}
+\item{first_time}{Cycle start timestamp (maneuver start) / Timestamp de início do ciclo (início da manobra).}
+\item{exit_time}{Cycle end timestamp (truck departure) / Timestamp de término do ciclo (partida do caminhão).}
+\item{duration_min}{Total cycle time ($X_i$) / Tempo total do ciclo em minutos (soma de Mi, Di e Oi).}
+\item{load_fleet}{Loading fleet category / Categoria da frota de carga.}
+\item{haul_fleet}{Hauling fleet category / Categoria da frota de transporte atendida.}
+\item{load_id}{Anonymized loading unit ID / ID anonimizado da unidade de carga.}
+\item{haul_id}{Anonymized hauling unit ID / ID anonimizado do caminhão atendido.}
+\item{origin}{Material origin location / Local de origem do material.}
+\item{material}{Material type (Ore/Waste) / Tipo de material (Minério/Estéril).}
+\item{payload}{Total cycle tonnage / Total de toneladas carregadas no ciclo.}
+\item{load_status}{Qualitative load status / Status qualitativo da carga (Target Met, Underload, etc.).}
+\item{m_time}{Specific maneuver duration ($M_i$) / Duração específica da manobra de posicionamento.}
+\item{l_time}{Effective loading duration ($D_i$) / Duração do carregamento efetivo.}
+\item{i_time}{Operational idle duration ($O_i$) / Duração da ociosidade operacional.}
 }
 }
 \usage{
 load_cycles_mine_a
 }
 \description{
-Um conjunto de dados em formato largo onde cada linha representa um ciclo completo de carregamento.
+English: Aggregated dataset where each row represents a complete loading cycle ($X_i$).
+}
+\details{
+Português: Um conjunto de dados em formato largo onde cada linha representa um
+ciclo completo de carregamento.
 }
 \keyword{datasets}

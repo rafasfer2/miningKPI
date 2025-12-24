@@ -3,28 +3,33 @@
 \docType{data}
 \name{load_events_mine_a}
 \alias{load_events_mine_a}
-\title{Mine A Loading Events (Base Notation)}
+\title{Mine A Loading Events (Base Notation) / Eventos de Carregamento - Mina A}
 \format{
-Um tibble com 9 colunas:
+A tibble with 11 columns / Um tibble com 11 colunas:
 \describe{
-\item{cycle_id}{Identificador único do ciclo de carregamento, permitindo a conexão com o banco de ciclos.}
-\item{first_time}{Timestamp de início do evento específico (maneuver, loading ou idle).}
-\item{exit_time}{Timestamp de término do evento específico (Exit Time - Ti).}
-\item{load_fleet}{Classificação técnica internacional do equipamento de carga (ex: Electric Shovel).}
-\item{load_id}{Identificador anonimizado da unidade de carregamento.}
-\item{haul_id}{Identificador anonimizado da unidade de transporte atendida (NA para estados idle).}
-\item{origin}{Localização da frente de lavra (Bench, Stockpile ou Rehandling).}
-\item{material}{Tipo de material movimentado: Ore (Minério) ou Waste (Estéril).}
-\item{payload}{Massa carregada (Li) em toneladas. Registrada apenas durante o evento 'loading'.}
-\item{event_type}{O estado operacional atual: maneuver (manobra), loading (carga) ou idle (ocioso).}
-\item{duration_min}{Duração do evento em minutos decimais.}
+\item{cycle_id}{Unique identifier for the loading cycle / Identificador único do ciclo de carregamento.}
+\item{first_time}{Start timestamp of the event / Timestamp de início do evento específico.}
+\item{exit_time}{End timestamp of the event ($T_i$) / Timestamp de término do evento específico.}
+\item{load_fleet}{Technical equipment class / Classificação técnica internacional do equipamento de carga.}
+\item{load_id}{Anonymized loading unit ID / Identificador anonimizado da unidade de carregamento.}
+\item{haul_id}{Anonymized hauling unit ID / Identificador anonimizado da unidade de transporte atendida.}
+\item{origin}{Loading location / Localização da frente de lavra (Bench, Stockpile ou Rehandling).}
+\item{material}{Type of material: Ore or Waste / Tipo de material movimentado: Minério ou Estéril.}
+\item{payload}{Loaded mass ($L_i$) in tons / Massa carregada em toneladas.}
+\item{event_type}{Operational state: maneuver, loading, or idle / Estado operacional: manobra, carga ou ocioso.}
+\item{duration_min}{Event duration in decimal minutes / Duração do evento em minutos decimais.}
 }
 }
 \usage{
 load_events_mine_a
 }
 \description{
-Um conjunto de dados tidy, em formato longo, representando o processo estocástico de carregamento.
-Contém os três estados fundamentais para cada composição atendida pela unidade de carga.
+English: A tidy, long-format dataset representing the stochastic loading process.
+It contains the three fundamental states for each composition served by the loading unit.
+}
+\details{
+Português: Um conjunto de dados tidy, em formato longo, representando o processo
+estocástico de carregamento. Contém os três estados fundamentais para cada
+composição atendida pela unidade de carga.
 }
 \keyword{datasets}

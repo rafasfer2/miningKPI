@@ -3,35 +3,38 @@
 \docType{data}
 \name{haul_cycles_mine_a}
 \alias{haul_cycles_mine_a}
-\title{Mine A Hauling Cycles (Performance & Scale)}
+\title{Mine A Hauling Cycles (Performance & Scale) / Ciclos de Transporte - Mina A}
 \format{
-Um tibble em formato largo com as métricas de performance:
+A tibble with performance metrics / Um tibble com 18 colunas:
 \describe{
-\item{cycle_id}{Identificador único do ciclo de transporte.}
-\item{first_time}{Início da jornada (entrada na fila de carga).}
-\item{exit_time}{Término da jornada (conclusão da descarga).}
-\item{duration_min}{Duração total da viagem (Xj).}
-\item{load_fleet}{Frota que realizou o carregamento.}
-\item{haul_fleet}{Frota que realizou o transporte (segregada por fabricante/classe).}
-\item{payload}{Massa carregada registrada pelo sensor do caminhão (Tons).}
-\item{scale_weight}{Massa real registrada pela balança fixa de conferência.}
-\item{scale_ok}{Variável lógica indicando se a pesagem da balança foi validada.}
-\item{load_status}{Classificação de conformidade da carga.}
-\item{load_factor}{Fator de preenchimento/enchimento da caçamba.}
-\item{dmt_full}{Distância média de transporte carregado (km).}
-\item{dmt_empty}{Distância média de transporte vazio (km).}
-\item{dmt_total}{Soma das distâncias de ida e volta (km).}
-\item{m_time}{Tempo consolidado de manobras (Carga + Descarga).}
-\item{l_time}{Tempo de carregamento efetivo.}
-\item{d_time}{Tempo de descarga efetiva.}
-\item{q_time}{Tempo total em fila (Carga + Descarga).}
+\item{cycle_id}{Unique journey identifier / Identificador único do ciclo de transporte.}
+\item{first_time}{Start of journey (load queue entry) / Início da jornada (entrada na fila de carga).}
+\item{exit_time}{End of journey (dump completion) / Término da jornada (conclusão da descarga).}
+\item{duration_min}{Total journey duration ($X_j$) / Duração total da viagem.}
+\item{load_fleet}{Fleet that performed the loading / Frota que realizou o carregamento.}
+\item{haul_fleet}{Fleet that performed the hauling / Frota que realizou o transporte.}
+\item{payload}{Truck sensor registered mass / Massa carregada registrada pelo sensor do caminhão.}
+\item{scale_weight}{Stationary scale registered mass / Massa real registrada pela balança fixa.}
+\item{scale_ok}{Logical scale validation / Variável lógica indicando se a pesagem foi validada.}
+\item{load_status}{Load compliance classification / Classificação de conformidade da carga.}
+\item{load_factor}{Bucket fill factor / Fator de preenchimento da caçamba.}
+\item{dmt_full}{Average full haul distance / Distância média de transporte carregado (km).}
+\item{dmt_empty}{Average empty haul distance / Distância média de transporte vazio (km).}
+\item{dmt_total}{Total cycle distance / Soma das distâncias de ida e volta (km).}
+\item{m_time}{Consolidated maneuver time / Tempo consolidado de manobras (Carga + Descarga).}
+\item{l_time}{Effective loading time / Tempo de carregamento efetivo.}
+\item{d_time}{Effective dumping time / Tempo de descarga efetiva.}
+\item{q_time}{Total queue time / Tempo total em fila (Carga + Descarga).}
 }
 }
 \usage{
 haul_cycles_mine_a
 }
 \description{
-Dataset consolidado onde cada linha representa uma viagem completa, incluindo variáveis
-de distância (DMT), conformidade de balança e fatores de carga.
+English: Consolidated dataset of haul trips including DMT and scale compliance.
+}
+\details{
+Português: Dataset consolidado onde cada linha representa uma viagem completa,
+incluindo variáveis de distância (DMT) e balança.
 }
 \keyword{datasets}
