@@ -5,38 +5,34 @@
 \alias{drill_cycles_mine_d}
 \title{Mine D Drilling Cycles (Aggregated) / Ciclos de Perfuração - Mina D}
 \format{
-A tibble with 18 columns / Um tibble com 18 colunas:
+A tibble with consolidated KPIs / Um tibble com indicadores de performance:
 \describe{
 \item{drill_id}{Unique drill identifier / Identificador único da perfuratriz.}
 \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
 \item{origin}{Data origin / Origem da informação.}
 \item{date}{Calendar date / Data civil do registro.}
-\item{p_time}{Productive Time / Tempo Produtivo.}
-\item{d_time}{Delay Time / Tempo de Atraso.}
-\item{h_time}{Hammer or Effective Drilling Time / Tempo de Percussão ou Perfuração Efetiva.}
-\item{m_time}{Maintenance Time / Tempo de Manutenção.}
-\item{xi_min}{Auxiliary activity time in minutes / Tempo de atividades auxiliares em minutos.}
-\item{allocated_meters}{Total meters drilled in the cycle / Total de metros perfurados no ciclo.}
-\item{boreholes_count}{Number of boreholes completed in the cycle / Quantidade de furos realizados no ciclo.}
-\item{ho_off}{Operational hour meter offset / Offset de horímetro operacional.}
-\item{hm_off}{Hammer hour meter offset / Offset de horímetro de percussão.}
-\item{ht_off}{Total time offset / Offset de tempo total.}
-\item{hc_off}{Cycle control offset / Offset de controle de ciclo.}
-\item{prod_day}{Production day (operational shift) / Dia de produção (considerando o turno operacional).}
-\item{delta_ho}{Operational hour meter variation / Variação do horímetro operacional no ciclo.}
-\item{avg_rop}{Average Rate of Penetration / Taxa de Penetração Média.}
+\item{xi_min}{Total Operational Cycle Time (Xi) in minutes / Tempo total do Ciclo Operacional (Xi) em minutos.}
+\item{allocated_meters_day}{Total meters drilled by the rig in the day / Total de metros perfurados pela perfuratriz no dia.}
+\item{boreholes_count}{Number of unique borehole UIDs identified / Quantidade de furos únicos (UIDs) identificados.}
+\item{cycle_count}{Number of complete operational cycles (phase 1 starts) / Quantidade de ciclos operacionais completos (início na fase 1).}
+\item{ho_off}{Official Operational hours (Macro) / Horas operacionais oficiais (Macro).}
+\item{hm_off}{Official Engine hours (Macro) / Horas de motor oficiais (Macro).}
+\item{ht_off}{Official Total hours (Macro) / Horas totais oficiais (Macro).}
+\item{hc_off}{Official Calendar hours (Macro) / Horas calendário oficiais (Macro).}
+\item{delta_ho}{Difference between telemetry Xi and official HO / Diferença entre Xi da telemetria e o HO oficial.}
+\item{avg_rop}{Average Rate of Penetration (m/h) based on Xi / Taxa de Penetração Média (m/h) baseada no Xi.}
 }
 }
 \source{
-Processed from drilling event data / Processado a partir dos dados de eventos de perfuração.
+Aggregated from drill_events_mine_d.
 }
 \usage{
 drill_cycles_mine_d
 }
 \description{
-English: Consolidated dataset with performance indicators (KPIs) per drilling cycle or period.
+English: Consolidated dataset with performance indicators (KPIs) aggregated by cycle or period.
 }
 \details{
-Português: Dataset consolidado com indicadores de performance (KPIs) por ciclo ou período de perfuração.
+Português: Dataset consolidado com indicadores de performance (KPIs) agregados por ciclo ou período.
 }
 \keyword{datasets}
