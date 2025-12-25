@@ -3,29 +3,39 @@
 \docType{data}
 \name{drill_events_mine_d}
 \alias{drill_events_mine_d}
-\title{Drilling Micro-Events (Sossego 2023) / Eventos Micro de Perfuração}
+\title{Mine D Drilling Events / Eventos de Perfuração - Mina D}
 \format{
-A tibble with 9 columns / Um tibble com 9 colunas:
+A tibble with 17 columns / Um tibble com 17 colunas:
 \describe{
-\item{drill_id}{Anonymized equipment ID / ID anonimizado do equipamento.}
-\item{drill_fleet}{Technical fleet class / Classificação técnica da frota.}
-\item{origin}{Standardized pit region / Região da mina padronizada.}
-\item{event_type}{Fundamental event type / Tipo de evento (drilling, setup, tramming, rods, inoperable).}
-\item{category}{Operational category / Categoria operacional (HEF = Efetivas, HOI = Inoperante).}
-\item{duration_min}{Calculated duration / Duração do evento em minutos (via dhours).}
-\item{allocated_meters}{Allocated production / Produção estimada do evento (Rateio Proporcional).}
-\item{first_time}{Event start timestamp / Timestamp inicial do evento.}
-\item{exit_time}{Corrected end timestamp / Timestamp final corrigido.}
+\item{drill_id}{Unique drill identifier / Identificador único da perfuratriz.}
+\item{borehole_uid}{Unique borehole identifier / Identificador único do furo (borehole).}
+\item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
+\item{origin}{Data origin (e.g., Dispatch System) / Origem da informação (ex: Sistema de Despacho).}
+\item{first_time}{Event start timestamp / Data e hora de início do evento.}
+\item{exit_time}{Event end timestamp / Data e hora de término do evento.}
+\item{duration_min}{Total event duration in minutes / Duração total do evento em minutos.}
+\item{event_type}{Type of registered event (Drilling, Maneuver, Delay, etc.) / Tipo do evento registrado (Perfuração, Manobra, Atraso, etc.).}
+\item{category}{Operational category (Operational, Standby, Maintenance) / Categoria operacional do evento (Operacional, Standby, Manutenção).}
+\item{engine_hours}{Engine hour meter at time of record / Horímetro do motor no momento do registro.}
+\item{data_source}{Primary raw data source / Fonte primária dos dados brutos.}
+\item{original_ids_raw}{Original IDs from the source system / IDs originais provenientes do sistema fonte.}
+\item{original_tag}{Original event tag in the source system / Tag ou etiqueta original do evento no sistema de origem.}
+\item{date}{Calendar date / Data civil do registro.}
+\item{total_min_efh}{Total effective hours in minutes / Total de minutos efetivos (Effective Hours).}
+\item{prod_day}{Production day (operational shift) / Dia de produção (considerando o turno operacional).}
+\item{allocated_meters}{Drilled meters allocated to this event / Metros perfurados alocados a este evento.}
 }
+}
+\source{
+Integration via data-raw in miningKPI package / Integração via diretório data-raw do pacote miningKPI.
 }
 \usage{
 drill_events_mine_d
 }
 \description{
-English: Treated and anonymized drill rig telemetry with production allocation.
+English: Processed dataset containing the detailed event history of each drill rig.
 }
 \details{
-Português: Dataset contendo a telemetria tratada e anonimizada das perfuratrizes
-com rateio proporcional de produção.
+Português: Dataset processado contendo o histórico detalhado de eventos de cada perfuratriz.
 }
 \keyword{datasets}

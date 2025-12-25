@@ -3,30 +3,40 @@
 \docType{data}
 \name{drill_cycles_mine_d}
 \alias{drill_cycles_mine_d}
-\title{Drilling Cycles (Reconciled) / Ciclos de Perfuração Reconciliados}
+\title{Mine D Drilling Cycles (Aggregated) / Ciclos de Perfuração - Mina D}
 \format{
-A tibble with 10 columns / Um tibble com 10 colunas:
+A tibble with 18 columns / Um tibble com 18 colunas:
 \describe{
-\item{drill_id}{Anonymized equipment ID / ID anonimizado do equipamento.}
-\item{date}{Operational reference date / Data de referência operacional.}
-\item{xi_min}{Sum of cycle times ($P+D+H+M$) / Soma dos tempos do ciclo em minutos.}
-\item{p_time}{Total daily setup time / Tempo total de Setup no dia.}
-\item{d_time}{Total daily drilling time / Tempo total de Perfuração Efetiva no dia.}
-\item{allocated_meters}{Sum of allocated production / Soma da produção alocada.}
-\item{ho_off}{Official Operating Hours / Horas Operativas Oficiais (Macro).}
-\item{hm_off}{Official Maintenance Hours / Horas de Manutenção Oficiais.}
-\item{prod_day}{Official total daily meters / Produção total do dia em metros (Oficial).}
-\item{delta_ho}{Gap between Xi and official HO / Diferença entre o ciclo (Xi) e o oficial.}
+\item{drill_id}{Unique drill identifier / Identificador único da perfuratriz.}
+\item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
+\item{origin}{Data origin / Origem da informação.}
+\item{date}{Calendar date / Data civil do registro.}
+\item{p_time}{Productive Time / Tempo Produtivo.}
+\item{d_time}{Delay Time / Tempo de Atraso.}
+\item{h_time}{Hammer or Effective Drilling Time / Tempo de Percussão ou Perfuração Efetiva.}
+\item{m_time}{Maintenance Time / Tempo de Manutenção.}
+\item{xi_min}{Auxiliary activity time in minutes / Tempo de atividades auxiliares em minutos.}
+\item{allocated_meters}{Total meters drilled in the cycle / Total de metros perfurados no ciclo.}
+\item{boreholes_count}{Number of boreholes completed in the cycle / Quantidade de furos realizados no ciclo.}
+\item{ho_off}{Operational hour meter offset / Offset de horímetro operacional.}
+\item{hm_off}{Hammer hour meter offset / Offset de horímetro de percussão.}
+\item{ht_off}{Total time offset / Offset de tempo total.}
+\item{hc_off}{Cycle control offset / Offset de controle de ciclo.}
+\item{prod_day}{Production day (operational shift) / Dia de produção (considerando o turno operacional).}
+\item{delta_ho}{Operational hour meter variation / Variação do horímetro operacional no ciclo.}
+\item{avg_rop}{Average Rate of Penetration / Taxa de Penetração Média.}
 }
+}
+\source{
+Processed from drilling event data / Processado a partir dos dados de eventos de perfuração.
 }
 \usage{
 drill_cycles_mine_d
 }
 \description{
-English: Daily consolidated data crossing Micro Cycle ($X_i$) vs Macro Closing.
+English: Consolidated dataset with performance indicators (KPIs) per drilling cycle or period.
 }
 \details{
-Português: Dataset diário por equipamento que cruza a Identidade Fundamental do
-Ciclo ($X_i$) com o fechamento oficial (Requipam).
+Português: Dataset consolidado com indicadores de performance (KPIs) por ciclo ou período de perfuração.
 }
 \keyword{datasets}

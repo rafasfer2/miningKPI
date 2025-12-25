@@ -101,45 +101,61 @@
 #' }
 "haul_cycles_mine_a"
 
-#' Drilling Micro-Events (Sossego 2023) / Eventos Micro de Perfuração
+#' Mine D Drilling Events / Eventos de Perfuração - Mina D
 #'
-#' English: Treated and anonymized drill rig telemetry with production allocation.
+#' English: Processed dataset containing the detailed event history of each drill rig.
 #'
-#' Português: Dataset contendo a telemetria tratada e anonimizada das perfuratrizes
-#' com rateio proporcional de produção.
+#' Português: Dataset processado contendo o histórico detalhado de eventos de cada perfuratriz.
 #'
-#' @format A tibble with 9 columns / Um tibble com 9 colunas:
+#' @format A tibble with 17 columns / Um tibble com 17 colunas:
 #' \describe{
-#'   \item{drill_id}{Anonymized equipment ID / ID anonimizado do equipamento.}
-#'   \item{drill_fleet}{Technical fleet class / Classificação técnica da frota.}
-#'   \item{origin}{Standardized pit region / Região da mina padronizada.}
-#'   \item{event_type}{Fundamental event type / Tipo de evento (drilling, setup, tramming, rods, inoperable).}
-#'   \item{category}{Operational category / Categoria operacional (HEF = Efetivas, HOI = Inoperante).}
-#'   \item{duration_min}{Calculated duration / Duração do evento em minutos (via dhours).}
-#'   \item{allocated_meters}{Allocated production / Produção estimada do evento (Rateio Proporcional).}
-#'   \item{first_time}{Event start timestamp / Timestamp inicial do evento.}
-#'   \item{exit_time}{Corrected end timestamp / Timestamp final corrigido.}
+#'   \item{drill_id}{Unique drill identifier / Identificador único da perfuratriz.}
+#'   \item{borehole_uid}{Unique borehole identifier / Identificador único do furo (borehole).}
+#'   \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
+#'   \item{origin}{Data origin (e.g., Dispatch System) / Origem da informação (ex: Sistema de Despacho).}
+#'   \item{first_time}{Event start timestamp / Data e hora de início do evento.}
+#'   \item{exit_time}{Event end timestamp / Data e hora de término do evento.}
+#'   \item{duration_min}{Total event duration in minutes / Duração total do evento em minutos.}
+#'   \item{event_type}{Type of registered event (Drilling, Maneuver, Delay, etc.) / Tipo do evento registrado (Perfuração, Manobra, Atraso, etc.).}
+#'   \item{category}{Operational category (Operational, Standby, Maintenance) / Categoria operacional do evento (Operacional, Standby, Manutenção).}
+#'   \item{engine_hours}{Engine hour meter at time of record / Horímetro do motor no momento do registro.}
+#'   \item{data_source}{Primary raw data source / Fonte primária dos dados brutos.}
+#'   \item{original_ids_raw}{Original IDs from the source system / IDs originais provenientes do sistema fonte.}
+#'   \item{original_tag}{Original event tag in the source system / Tag ou etiqueta original do evento no sistema de origem.}
+#'   \item{date}{Calendar date / Data civil do registro.}
+#'   \item{total_min_efh}{Total effective hours in minutes / Total de minutos efetivos (Effective Hours).}
+#'   \item{prod_day}{Production day (operational shift) / Dia de produção (considerando o turno operacional).}
+#'   \item{allocated_meters}{Drilled meters allocated to this event / Metros perfurados alocados a este evento.}
 #' }
+#' @source Integration via data-raw in miningKPI package / Integração via diretório data-raw do pacote miningKPI.
 "drill_events_mine_d"
 
-#' Drilling Cycles (Reconciled) / Ciclos de Perfuração Reconciliados
+#' Mine D Drilling Cycles (Aggregated) / Ciclos de Perfuração - Mina D
 #'
-#' English: Daily consolidated data crossing Micro Cycle ($X_i$) vs Macro Closing.
+#' English: Consolidated dataset with performance indicators (KPIs) per drilling cycle or period.
 #'
-#' Português: Dataset diário por equipamento que cruza a Identidade Fundamental do
-#' Ciclo ($X_i$) com o fechamento oficial (Requipam).
+#' Português: Dataset consolidado com indicadores de performance (KPIs) por ciclo ou período de perfuração.
 #'
-#' @format A tibble with 10 columns / Um tibble com 10 colunas:
+#' @format A tibble with 18 columns / Um tibble com 18 colunas:
 #' \describe{
-#'   \item{drill_id}{Anonymized equipment ID / ID anonimizado do equipamento.}
-#'   \item{date}{Operational reference date / Data de referência operacional.}
-#'   \item{xi_min}{Sum of cycle times ($P+D+H+M$) / Soma dos tempos do ciclo em minutos.}
-#'   \item{p_time}{Total daily setup time / Tempo total de Setup no dia.}
-#'   \item{d_time}{Total daily drilling time / Tempo total de Perfuração Efetiva no dia.}
-#'   \item{allocated_meters}{Sum of allocated production / Soma da produção alocada.}
-#'   \item{ho_off}{Official Operating Hours / Horas Operativas Oficiais (Macro).}
-#'   \item{hm_off}{Official Maintenance Hours / Horas de Manutenção Oficiais.}
-#'   \item{prod_day}{Official total daily meters / Produção total do dia em metros (Oficial).}
-#'   \item{delta_ho}{Gap between Xi and official HO / Diferença entre o ciclo (Xi) e o oficial.}
+#'   \item{drill_id}{Unique drill identifier / Identificador único da perfuratriz.}
+#'   \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
+#'   \item{origin}{Data origin / Origem da informação.}
+#'   \item{date}{Calendar date / Data civil do registro.}
+#'   \item{p_time}{Productive Time / Tempo Produtivo.}
+#'   \item{d_time}{Delay Time / Tempo de Atraso.}
+#'   \item{h_time}{Hammer or Effective Drilling Time / Tempo de Percussão ou Perfuração Efetiva.}
+#'   \item{m_time}{Maintenance Time / Tempo de Manutenção.}
+#'   \item{xi_min}{Auxiliary activity time in minutes / Tempo de atividades auxiliares em minutos.}
+#'   \item{allocated_meters}{Total meters drilled in the cycle / Total de metros perfurados no ciclo.}
+#'   \item{boreholes_count}{Number of boreholes completed in the cycle / Quantidade de furos realizados no ciclo.}
+#'   \item{ho_off}{Operational hour meter offset / Offset de horímetro operacional.}
+#'   \item{hm_off}{Hammer hour meter offset / Offset de horímetro de percussão.}
+#'   \item{ht_off}{Total time offset / Offset de tempo total.}
+#'   \item{hc_off}{Cycle control offset / Offset de controle de ciclo.}
+#'   \item{prod_day}{Production day (operational shift) / Dia de produção (considerando o turno operacional).}
+#'   \item{delta_ho}{Operational hour meter variation / Variação do horímetro operacional no ciclo.}
+#'   \item{avg_rop}{Average Rate of Penetration / Taxa de Penetração Média.}
 #' }
+#' @source Processed from drilling event data / Processado a partir dos dados de eventos de perfuração.
 "drill_cycles_mine_d"
