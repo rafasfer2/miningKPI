@@ -7,22 +7,21 @@
 add_missing_drill_phases(df)
 }
 \arguments{
-\item{df}{A tibble containing drilling events. Must include columns:
-\code{drill_id}, \code{cycle}, \code{phase}, \code{first_time}, \code{exit_time},
-\code{borehole_uid}, \code{origin}, \code{drill_fleet}.}
+\item{df}{Um data frame ou tibble contendo eventos de perfuração (drill events).}
 }
 \value{
-A tibble with added rows for missing phases (duration = 0), sorted by drill_id, cycle, and phase.
+Um tibble com as fases faltantes imputadas e um marcador de saída (Fase 6).
 }
 \description{
-Ensures that every drilling cycle contains all 5 fundamental phases of the drilling identity:
-\itemize{
-\item \strong{1 (Pi)}: Positioning
-\item \strong{2 (Ci)}: Collaring
-\item \strong{3 (Di)}: Drilling
-\item \strong{4 (Hi)}: Rod Handling
-\item \strong{5 (Mi)}: Tramming
+Garante que cada ciclo de perfuração contenha as 5 fases fundamentais (1-Posicionamento,
+2-Emboquilhamento, 3-Perfuração, 4-Hastes, 5-Deslocamento). Fases ausentes são
+imputadas com duração zero. Marcadores técnicos são adicionados para conclusão do ciclo.
 }
-If a phase is missing in the telemetry data, a zero-duration event is inserted
-with category "SYSTEM_FILL" and description "System Imputed - Missing Phase".
+\examples{
+library(dplyr)
+# Exemplo de uso básico com o dataset do pacote
+drill_events_mine_d \%>\%
+  add_missing_drill_phases() \%>\%
+  filter(drill_id == "DRILL_100", cycle == 1)
+
 }

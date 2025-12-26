@@ -1,7 +1,9 @@
 # Define global variables to satisfy R CMD check
 # These match the tidy, long-format datasets in the package
 utils::globalVariables(c(
-  # --- DRILLING (Adicionado para corrigir os Notes atuais) ---
+  # --- DRILLING (Métricas de Performance e Higienização) ---
+  "anchor_time", "li", "xi_min", "pi_min", "ci_min", "di_min",
+  "hi_min", "mi_min", "TDM", "WH", "periodo", "cycle_bucket", "timestamp",
   "drill_id", "drill_fleet", "borehole_uid", "cycle", "phase",
   "ref_time", "category", "category_kpi", "description_en",
   "description_pt", "allocated_meters", "data_source",
@@ -31,6 +33,6 @@ utils::globalVariables(c(
   "queue_at_dump", "maneuver_at_dump", "dumping", "travel_empty",
   "travel_time", "lj", "xj",
 
-  # --- TIDYVERSE HELPERS ---
-  "select", "where", "everything", "any_of", "all_of", ".data"
+  # --- TIDYVERSE HELPERS & LUBRIDATE ---
+  "select", "where", "everything", "any_of", "all_of", ".data", "is.POSIXct"
 ))
