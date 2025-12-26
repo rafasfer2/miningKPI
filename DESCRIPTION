@@ -10,14 +10,13 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Depends: 
     R (>= 3.5.0)
-Imports: 
+Imports:
     dplyr,
-    lubridate,
-    readxl,
-    stringr,
-    rlang,
     tidyr,
-    magrittr
+    magrittr,
+    rlang,
+    lubridate,
+    tibble
 LazyData: true
 LazyDataCompression: xz
 URL: https://github.com/rafasfer2/miningKPI

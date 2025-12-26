@@ -11,7 +11,7 @@ A tibble with 13 columns / Um tibble com 13 colunas:
 \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
 \item{borehole_uid}{Unique borehole identifier / Identificador único do furo (gerado via lógica).}
 \item{cycle}{Sequential cycle ID per drill (starts at setup) / ID sequencial do ciclo por perfuratriz (inicia no setup).}
-\item{phase}{Productive phase (1: Setup, 2: Drilling, 3: Rods, 4: Tramming) / Fase produtiva (1: Setup, 2: Perfuração, 3: Hastes, 4: Translação).}
+\item{phase}{Productive phase (1: Positioning, 2: Collaring, 3: Drilling, 4: Rods, 5: Tramming) / Fase produtiva (1-5).}
 \item{origin}{Data origin (Pit area) / Origem da informação (Área da mina).}
 \item{event_type}{Type of registered event / Tipo do evento registrado.}
 \item{category}{Operational category (EFH, ODH, etc.) / Categoria operacional do evento.}
@@ -30,10 +30,10 @@ drill_events_mine_d
 }
 \description{
 English: Processed dataset containing the detailed event history of each drill rig,
-including cycle and phase identification (1-4).
+including cycle and phase identification (1-5).
 }
 \details{
 Português: Dataset processado contendo o histórico detalhado de eventos de cada perfuratriz,
-incluindo a identificação de ciclo e fase (1-4).
+incluindo a identificação de ciclo e fase (1-5).
 }
 \keyword{datasets}
