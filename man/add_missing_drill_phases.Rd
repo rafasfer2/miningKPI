@@ -15,11 +15,11 @@ Um tibble com as fases faltantes imputadas e um marcador de saída (Fase 6).
 \description{
 Garante que cada ciclo de perfuração contenha as 5 fases fundamentais (1-Posicionamento,
 2-Emboquilhamento, 3-Perfuração, 4-Hastes, 5-Deslocamento). Fases ausentes são
-imputadas com duração zero. Marcadores técnicos são adicionados para conclusão do ciclo.
+imputadas com duração zero e recebem a nomenclatura técnica correta no event_type.
 }
 \examples{
 library(dplyr)
-# Exemplo de uso básico com o dataset do pacote
+# Exemplo de uso básico garantindo as 5 fases no Ciclo 1 da DRILL_100
 drill_events_mine_d \%>\%
   add_missing_drill_phases() \%>\%
   filter(drill_id == "DRILL_100", cycle == 1)

@@ -3,7 +3,7 @@
 #' @description
 #' Garante que cada ciclo de perfuração contenha as 5 fases fundamentais (1-Posicionamento,
 #' 2-Emboquilhamento, 3-Perfuração, 4-Hastes, 5-Deslocamento). Fases ausentes são
-#' imputadas com duração zero. Marcadores técnicos são adicionados para conclusão do ciclo.
+#' imputadas com duração zero e recebem a nomenclatura técnica correta no event_type.
 #'
 #' @param df Um data frame ou tibble contendo eventos de perfuração (drill events).
 #'
@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' library(dplyr)
-#' # Exemplo de uso básico com o dataset do pacote
+#' # Exemplo de uso básico garantindo as 5 fases no Ciclo 1 da DRILL_100
 #' drill_events_mine_d %>%
 #'   add_missing_drill_phases() %>%
 #'   filter(drill_id == "DRILL_100", cycle == 1)
@@ -22,24 +22,22 @@ add_missing_drill_phases <- function(df) {
   # 1. Limpeza inicial
   df <- df %>% dplyr::ungroup()
 
-  # 2. Criar esqueleto ideal de fases 1 a 5 para cada ciclo existente
+  # 2. Criar esqueleto ideal de fases 1 a 5
   ideal_structure <- df %>%
     dplyr::distinct(drill_id, cycle) %>%
     tidyr::expand_grid(phase = c(1, 2, 3, 4, 5))
 
-  # 3. Identificar fases ausentes via anti-join
+  # 3. Identificar fases ausentes
   missing_phases <- ideal_structure %>%
     dplyr::anti_join(df, by = c("drill_id", "cycle", "phase"))
 
   if(nrow(missing_phases) > 0) {
-    # Coleta metadados e define o tempo âncora (início do ciclo)
     reference_data <- df %>%
       dplyr::group_by(drill_id, cycle) %>%
       dplyr::summarise(
         borehole_uid = dplyr::first(borehole_uid),
         origin       = dplyr::first(origin),
         drill_fleet  = dplyr::first(drill_fleet),
-        # Ancoragem temporal para evitar NAs se a fase 1 for imputada
         anchor_time  = min(first_time, na.rm = TRUE),
         .groups      = "drop"
       )
@@ -47,7 +45,14 @@ add_missing_drill_phases <- function(df) {
     imputed_rows <- missing_phases %>%
       dplyr::left_join(reference_data, by = c("drill_id", "cycle")) %>%
       dplyr::mutate(
-        event_type      = "imputed_phase",
+        # Mapeamento categórico das fases imputadas
+        event_type = dplyr::case_when(
+          phase == 1 ~ "positioning",
+          phase == 2 ~ "collaring",
+          phase == 3 ~ "drilling",
+          phase == 4 ~ "rods",
+          phase == 5 ~ "tramming"
+        ),
         category        = "SYSTEM_FILL",
         description_en  = "System Imputed - Missing Phase",
         duration_min    = 0,
@@ -61,12 +66,11 @@ add_missing_drill_phases <- function(df) {
     df <- dplyr::bind_rows(df, imputed_rows)
   }
 
-  # 4. Sincronização de Timestamps e Adição da Fase 6 (Marcador Técnico)
+  # 4. Sincronização de Timestamps e Adição da Fase 6
   df_final <- df %>%
     dplyr::arrange(drill_id, cycle, phase, first_time) %>%
     dplyr::group_by(drill_id, cycle) %>%
     dplyr::mutate(
-      # Se for imputada, tenta pegar o fim da fase anterior ou usa a âncora
       first_time = dplyr::if_else(
         category == "SYSTEM_FILL",
         dplyr::coalesce(dplyr::lag(exit_time), first_time),
@@ -74,7 +78,6 @@ add_missing_drill_phases <- function(df) {
       ),
       exit_time = dplyr::if_else(category == "SYSTEM_FILL", first_time, exit_time)
     ) %>%
-    # Inserção técnica da Fase 6 para sinalizar fim de ciclo no log
     dplyr::group_modify(~ {
       last_exit <- max(.x$exit_time, na.rm = TRUE)
       exit_row <- .x[1, ]
@@ -83,7 +86,7 @@ add_missing_drill_phases <- function(df) {
       exit_row$description_en <- "Technical Cycle Completion Marker"
       exit_row$first_time <- last_exit
       exit_row$exit_time <- last_exit + 0.1
-      exit_row$duration_min <- 0.0016 # Equivalente a 0.1s
+      exit_row$duration_min <- 0.0016
       exit_row$category <- "SYSTEM_TECH"
       dplyr::bind_rows(.x, exit_row)
     }) %>%

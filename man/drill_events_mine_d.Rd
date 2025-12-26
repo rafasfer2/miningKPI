@@ -5,35 +5,37 @@
 \alias{drill_events_mine_d}
 \title{Mine D Drilling Events / Eventos de Perfuração - Mina D}
 \format{
-A tibble with 13 columns / Um tibble com 13 colunas:
+A tibble with 15 columns / Um tibble com 15 colunas:
 \describe{
-\item{drill_id}{Unique drill identifier / Identificador único da perfuratriz.}
+\item{drill_id}{Unique drill identifier (anonymized) / Identificador único da perfuratriz (anonimizado).}
 \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
-\item{borehole_uid}{Unique borehole identifier / Identificador único do furo (gerado via lógica).}
-\item{cycle}{Sequential cycle ID per drill (starts at setup) / ID sequencial do ciclo por perfuratriz (inicia no setup).}
+\item{borehole_uid}{Unique borehole identifier / Identificador único do furo.}
+\item{cycle}{Sequential cycle ID per drill / ID sequencial do ciclo por perfuratriz.}
 \item{phase}{Productive phase (1: Positioning, 2: Collaring, 3: Drilling, 4: Rods, 5: Tramming) / Fase produtiva (1-5).}
-\item{origin}{Data origin (Pit area) / Origem da informação (Área da mina).}
+\item{origin}{Data origin (Mine Area) / Origem da informação (Área da mina).}
 \item{event_type}{Type of registered event / Tipo do evento registrado.}
-\item{category}{Operational category (EFH, ODH, etc.) / Categoria operacional do evento.}
+\item{category}{Operational category (EFH, HOI, IIH, EIH, CMH, SPH) / Categoria operacional do evento.}
+\item{description_en}{Operational description in English / Descrição operacional em inglês.}
+\item{comment_en}{Translated telemetry comments (101 relationships) / Comentários da telemetria traduzidos.}
 \item{first_time}{Event start timestamp / Data e hora de início do evento.}
 \item{exit_time}{Event end timestamp / Data e hora de término do evento.}
 \item{duration_min}{Total event duration in minutes / Duração total do evento em minutos.}
-\item{allocated_meters}{Drilled meters proportionally allocated to the event / Metros perfurados alocados proporcionalmente ao evento.}
-\item{data_source}{Primary raw data source / Fonte primária dos dados brutos.}
+\item{allocated_meters}{Drilled meters proportionally allocated to the event / Metros perfurados alocados proporcionalmente.}
+\item{data_source}{Data source (Telemetry or Manual/Legacy) / Fonte dos dados.}
 }
 }
 \source{
-Processed via data-raw/drilling_processing.R in miningKPI package.
+Processed via data-raw/drilling_processing.R from Sossego Mine telemetry.
 }
 \usage{
 drill_events_mine_d
 }
 \description{
 English: Processed dataset containing the detailed event history of each drill rig,
-including cycle and phase identification (1-5).
+including cycle identification, productive phases (1-5), and 101 translated telemetry comments.
 }
 \details{
 Português: Dataset processado contendo o histórico detalhado de eventos de cada perfuratriz,
-incluindo a identificação de ciclo e fase (1-5).
+incluindo a identificação de ciclo, fases produtivas (1-5) e 101 comentários de telemetria traduzidos.
 }
 \keyword{datasets}

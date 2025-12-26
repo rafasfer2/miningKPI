@@ -11,28 +11,30 @@ A tibble with consolidated KPIs / Um tibble com indicadores de performance:
 \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
 \item{origin}{Data origin / Origem da informação.}
 \item{date}{Calendar date / Data civil do registro.}
-\item{xi_min}{Total Operational Cycle Time (Xi) in minutes / Tempo total do Ciclo Operacional (Xi) em minutos.}
+\item{xi_min}{Total Operational Cycle Time (Xi) in minutes from telemetry / Tempo total do Ciclo Operacional (Xi) via telemetria.}
 \item{allocated_meters_day}{Total meters drilled by the rig in the day / Total de metros perfurados pela perfuratriz no dia.}
 \item{boreholes_count}{Number of unique borehole UIDs identified / Quantidade de furos únicos (UIDs) identificados.}
-\item{cycle_count}{Number of complete operational cycles (phase 1 starts) / Quantidade de ciclos operacionais completos (início na fase 1).}
-\item{ho_off}{Official Operational hours (Macro) / Horas operacionais oficiais (Macro).}
+\item{cycle_count}{Number of complete operational cycles identified / Quantidade de ciclos operacionais completos.}
+\item{ho_off}{Official Operational hours (Macro) from ERP/Manual / Horas operacionais oficiais (Macro).}
 \item{hm_off}{Official Engine hours (Macro) / Horas de motor oficiais (Macro).}
 \item{ht_off}{Official Total hours (Macro) / Horas totais oficiais (Macro).}
 \item{hc_off}{Official Calendar hours (Macro) / Horas calendário oficiais (Macro).}
-\item{delta_ho}{Difference between telemetry Xi and official HO / Diferença entre Xi da telemetria e o HO oficial.}
-\item{avg_rop}{Average Rate of Penetration (m/h) based on Xi / Taxa de Penetração Média (m/h) baseada no Xi.}
+\item{delta_ho}{Difference between telemetry Xi and official HO (minutes) / Diferença entre Xi da telemetria e o HO oficial.}
+\item{avg_rop}{Average Rate of Penetration (m/h) based on productive drilling time / Taxa de Penetração Média (m/h) baseada no tempo de perfuração.}
 }
 }
 \source{
-Aggregated from drill_events_mine_d.
+Aggregated from drill_events_mine_d and joined with macro-appropriation data.
 }
 \usage{
 drill_cycles_mine_d
 }
 \description{
-English: Consolidated dataset with performance indicators (KPIs) aggregated by cycle or period.
+English: Consolidated dataset with performance indicators (KPIs) aggregated by cycle and day,
+cross-referenced with official macro-appropriation hours (HO, HM, HT, HC).
 }
 \details{
-Português: Dataset consolidado com indicadores de performance (KPIs) agregados por ciclo ou período.
+Português: Dataset consolidado com indicadores de performance (KPIs) agregados por ciclo e dia,
+cruzando dados de telemetria com horas oficiais de apropriação macro (HO, HM, HT, HC).
 }
 \keyword{datasets}
