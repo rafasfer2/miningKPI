@@ -14,7 +14,19 @@ A tibble with 15 columns / Um tibble com 15 colunas:
 \item{phase}{Productive phase (1: Positioning, 2: Collaring, 3: Drilling, 4: Rods, 5: Tramming) / Fase produtiva (1-5).}
 \item{origin}{Data origin (Mine Area) / Origem da informação (Área da mina).}
 \item{event_type}{Type of registered event / Tipo do evento registrado.}
-\item{category}{Operational category (EFH, HOI, IIH, EIH, CMH, SPH) / Categoria operacional do evento.}
+\item{category}{Operational category / Categoria operacional:
+\itemize{
+\item English: Effective Hours / Português: horas efetivas (HEF)
+\item English: Operational Delay Hours / Português: horas de atraso operacional (HAO)
+\item English: Miscellaneous Worked Hours / Português: horas trabalhadas diversas (HTD)
+\item English: Infrastructure Worked Hours / Português: horas trabalhadas de infraestrutura (HTI)
+\item English: Internal Idle Hours / Português: horas ociosas interna (HOI)
+\item English: External Idle Hours / Português: horas ociosas externa (HOE)
+\item English: Corrective Maintenance Hours / Português: horas de manutenção corretiva (HMC)
+\item English: Accident Hours / Português: horas de acidente (HAC)
+\item English: Systematic Preventive Maintenance Hours / Português: horas preventivas sistemática (MPS)
+\item English: Non-Systematic Preventive Maintenance Hours / Português: horas preventivas não sistemática (MPNS)
+}}
 \item{description_en}{Operational description in English / Descrição operacional em inglês.}
 \item{comment_en}{Translated telemetry comments (101 relationships) / Comentários da telemetria traduzidos.}
 \item{first_time}{Event start timestamp / Data e hora de início do evento.}
@@ -25,7 +37,7 @@ A tibble with 15 columns / Um tibble com 15 colunas:
 }
 }
 \source{
-Processed via data-raw/drilling_processing.R from Sossego Mine telemetry.
+Processed via data-raw/drilling_integration.R from Sossego Mine telemetry.
 }
 \usage{
 drill_events_mine_d
