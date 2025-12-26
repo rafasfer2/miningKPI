@@ -7,21 +7,22 @@
 add_missing_drill_phases(df)
 }
 \arguments{
-\item{df}{Um data frame ou tibble contendo eventos de perfuração (drill events).}
+\item{df}{Um data frame ou tibble contendo eventos de perfuração processados.}
 }
 \value{
-Um tibble com as fases faltantes imputadas e um marcador de saída (Fase 6).
+Um tibble com as fases faltantes imputadas e o marcador de saída (Fase 6).
 }
 \description{
 Garante que cada ciclo de perfuração contenha as 5 fases fundamentais (1-Posicionamento,
 2-Emboquilhamento, 3-Perfuração, 4-Hastes, 5-Deslocamento). Fases ausentes são
-imputadas com duração zero e recebem a nomenclatura técnica correta no event_type.
+imputadas com duração zero e recebem a nomenclatura técnica correta, utilizando
+os códigos sintéticos do pacote (ex: 299) e as 10 categorias de KPI (ex: HOI) para consistência.
 }
 \examples{
 library(dplyr)
-# Exemplo de uso básico garantindo as 5 fases no Ciclo 1 da DRILL_100
+# Exemplo de uso para garantir a estrutura de 5 fases em um ciclo específico
 drill_events_mine_d \%>\%
   add_missing_drill_phases() \%>\%
-  filter(drill_id == "DRILL_100", cycle == 1)
+  filter(drill_id == "DRILL_01", cycle == 1)
 
 }

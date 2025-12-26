@@ -3,18 +3,26 @@
 utils::globalVariables(c(
   # --- DRILLING (Métricas de Performance e Higienização) ---
   "anchor_time", "li", "xi_min", "pi_min", "ci_min", "di_min",
-  "hi_min", "mi_min", "TDM", "WH", "periodo", "cycle_bucket", "timestamp",
+  "hi_min", "mi_min", "TDM", "WH", "per\u00edodo", "cycle_bucket", "timestamp",
   "drill_id", "drill_fleet", "borehole_uid", "cycle", "phase",
   "ref_time", "category", "category_kpi", "description_en",
-  "description_pt", "allocated_meters", "data_source",
+  "description_pt", "allocated_meters", "data_source", "comment_en",
 
-  # --- CORE TIME COLUMNS ---
-  "first_time", "exit_time", "start_time", "duration_min",
+  # --- ANONIMIZAÇÃO E PROCESSAMENTO (Capítulo 4) ---
+  "original_code", "code", "original_id", "anon_id", "raw_desc_br",
+  "comment_clean", "sector_clean", "ids_tmp", "tag_tmp", "category_raw",
+  "cycle_trigger", "is_tramming", "is_pos", "total_min_efh_day", "prod_day_tmp",
+
+  # --- CORE TIME COLUMNS & GAP FILLING ---
+  "first_time", "exit_time", "start_time", "duration_min", "date",
   "start_time_inop", "exit_time_inop", "start_time_carga", "Fim",
+  "prev_exit", "Salto", "first_time_new", "exit_time_new",
 
-  # --- IDENTIFICATION & CATEGORIZATION ---
+  # --- IDENTIFICATION & CATEGORIZATION (Sossego Raw Data) ---
   "load_fleet", "haul_fleet", "load_id", "haul_id", "trip_id",
   "origin", "destination", "material", "load_status", "fleet_id",
+  "equipament", "sector", "comment", "Ids", "TAGId", "time_in", "time_gap",
+  "group", "day", "HO", "HM", "HT", "HC", "Produ\u00e7\u00e3o",
 
   # --- EVENT TYPES & OPERATIONAL STATES ---
   "event_type", "maneuver", "loading", "idle", "gap",
@@ -34,5 +42,5 @@ utils::globalVariables(c(
   "travel_time", "lj", "xj",
 
   # --- TIDYVERSE HELPERS & LUBRIDATE ---
-  "select", "where", "everything", "any_of", "all_of", ".data", "is.POSIXct"
+  "select", "where", "everything", "any_of", "all_of", ".data", "is.POSIXct", "n"
 ))

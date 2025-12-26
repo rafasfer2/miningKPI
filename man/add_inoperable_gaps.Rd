@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_inoperable_gaps.R
 \name{add_inoperable_gaps}
 \alias{add_inoperable_gaps}
-\title{Add Inoperable Gaps to Loading Cycles}
+\title{Add Inoperable Gaps to Operational Cycles}
 \usage{
 add_inoperable_gaps(df, limit_gap = 0.1)
 }
@@ -15,6 +15,15 @@ add_inoperable_gaps(df, limit_gap = 0.1)
 A data frame with inserted inoperable events.
 }
 \description{
-Identifies time gaps between consecutive loading cycles and inserts
-"Inoperable" bridge rows to ensure a continuous timeline.
+Identifies time gaps between consecutive cycles and inserts
+"IIH" bridge rows to ensure a continuous timeline.
+}
+\examples{
+\dontrun{
+# Exemplo de uso com dados de perfuração
+drill_events_mine_d \%>\%
+  filter(drill_id == "DRILL_01") \%>\%
+  add_inoperable_gaps(limit_gap = 0.5)
+}
+
 }
