@@ -16,13 +16,14 @@ Um tibble com as fases faltantes imputadas e o marcador de saída (Fase 6).
 Garante que cada ciclo de perfuração contenha as 5 fases fundamentais (1-Posicionamento,
 2-Emboquilhamento, 3-Perfuração, 4-Hastes, 5-Deslocamento). Fases ausentes são
 imputadas com duração zero e recebem a nomenclatura técnica correta, utilizando
-os códigos sintéticos do pacote (ex: 299) e as 10 categorias de KPI (ex: HOI) para consistência.
+os códigos sintéticos do pacote (ex: 299) e as categorias de KPI (ex: IIH) para consistência.
 }
 \examples{
 library(dplyr)
 # Exemplo de uso para garantir a estrutura de 5 fases em um ciclo específico
-drill_events_mine_d \%>\%
+# Usando DRILL_100 que existe no dataset drill_events_mine_d
+miningKPI::drill_events_mine_d \%>\%
   add_missing_drill_phases() \%>\%
-  filter(drill_id == "DRILL_01", cycle == 1)
+  dplyr::filter(drill_id == "DRILL_100", cycle == 1)
 
 }

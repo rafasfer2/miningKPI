@@ -5,22 +5,24 @@
 \alias{drill_cycles_mine_d}
 \title{Mine D Drilling Cycles (Aggregated) / Ciclos de Perfuração - Mina D}
 \format{
-A tibble with consolidated KPIs / Um tibble com indicadores de performance:
+A tibble with 16 columns / Um tibble com 16 colunas:
 \describe{
 \item{drill_id}{Unique drill identifier / Identificador único da perfuratriz.}
 \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
 \item{origin}{Data origin / Origem da informação.}
 \item{date}{Calendar date / Data civil do registro.}
-\item{xi_min}{Total Operational Cycle Time (Xi) in minutes from telemetry / Tempo total do Ciclo Operacional (Xi) via telemetria.}
-\item{allocated_meters_day}{Total meters drilled by the rig in the day / Total de metros perfurados pela perfuratriz no dia.}
-\item{boreholes_count}{Number of unique borehole UIDs identified / Quantidade de furos únicos (UIDs) identificados.}
-\item{cycle_count}{Number of complete operational cycles identified / Quantidade de ciclos operacionais completos.}
-\item{ho_off}{Official Operational hours (Macro) from ERP/Manual / Horas operacionais oficiais (Macro).}
+\item{cycle}{Sequential cycle ID / ID sequencial do ciclo.}
+\item{borehole_uid}{Unique borehole identifier / Identificador único do furo.}
+\item{local_x}{Anonymized Easting centroid of the borehole / Centroide local de Leste do furo.}
+\item{local_y}{Anonymized Northing centroid of the borehole / Centroide local de Norte do furo.}
+\item{xi_min}{Total Operational Cycle Time (Xi) in minutes / Tempo total do Ciclo Operacional (Xi).}
+\item{allocated_meters}{Total meters drilled in this cycle / Total de metros perfurados neste ciclo.}
+\item{n_phases}{Number of unique productive phases recorded / Quantidade de fases produtivas registradas.}
+\item{ho_off}{Official Operational hours (Macro) / Horas operacionais oficiais (Macro).}
 \item{hm_off}{Official Engine hours (Macro) / Horas de motor oficiais (Macro).}
 \item{ht_off}{Official Total hours (Macro) / Horas totais oficiais (Macro).}
 \item{hc_off}{Official Calendar hours (Macro) / Horas calendário oficiais (Macro).}
-\item{delta_ho}{Difference between telemetry Xi and official HO (minutes) / Diferença entre Xi da telemetria e o HO oficial.}
-\item{avg_rop}{Average Rate of Penetration (m/h) based on productive drilling time / Taxa de Penetração Média (m/h) baseada no tempo de perfuração.}
+\item{avg_rop}{Average Rate of Penetration (m/h) / Taxa de Penetração Média (m/h).}
 }
 }
 \source{
@@ -31,10 +33,10 @@ drill_cycles_mine_d
 }
 \description{
 English: Consolidated dataset with performance indicators (KPIs) aggregated by cycle and day,
-cross-referenced with official macro-appropriation hours (HO, HM, HT, HC).
+including anonymized spatial centroids for each borehole.
 }
 \details{
 Português: Dataset consolidado com indicadores de performance (KPIs) agregados por ciclo e dia,
-cruzando dados de telemetria com horas oficiais de apropriação macro (HO, HM, HT, HC).
+incluindo os centroides espaciais anonimizados de cada furo.
 }
 \keyword{datasets}

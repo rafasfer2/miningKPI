@@ -107,35 +107,40 @@ NULL
 #' Mine D Drilling Events / Eventos de Perfuração - Mina D
 #'
 #' English: Processed dataset containing the detailed event history of each drill rig,
-#' including cycle identification, productive phases (1-5), and 101 translated telemetry comments.
+#' including cycle identification, productive phases (1-5), anonymized local coordinates,
+#' and 101 translated telemetry comments.
 #'
 #' Português: Dataset processado contendo o histórico detalhado de eventos de cada perfuratriz,
-#' incluindo a identificação de ciclo, fases produtivas (1-5) e 101 comentários de telemetria traduzidos.
+#' incluindo a identificação de ciclo, fases produtivas (1-5), coordenadas locais anonimizadas
+#' e 101 comentários de telemetria traduzidos.
 #'
-#' @format A tibble with 15 columns / Um tibble com 15 colunas:
+#' @format A tibble with 18 columns / Um tibble com 18 colunas:
 #' \describe{
 #'   \item{drill_id}{Unique drill identifier (anonymized) / Identificador único da perfuratriz (anonimizado).}
 #'   \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
 #'   \item{borehole_uid}{Unique borehole identifier / Identificador único do furo.}
 #'   \item{cycle}{Sequential cycle ID per drill / ID sequencial do ciclo por perfuratriz.}
+#'   \item{code}{Operational code from telemetry / Código operacional da telemetria.}
 #'   \item{phase}{Productive phase (1: Positioning, 2: Collaring, 3: Drilling, 4: Rods, 5: Tramming) / Fase produtiva (1-5).}
 #'   \item{origin}{Data origin (Mine Area) / Origem da informação (Área da mina).}
 #'   \item{event_type}{Type of registered event / Tipo do evento registrado.}
-#'   \item{category}{Operational category / Categoria operacional:
+#'   \item{category}{Operational category (International Standards) / Categoria operacional:
 #'     \itemize{
-#'       \item English: Effective Hours / Português: horas efetivas (HEF)
-#'       \item English: Operational Delay Hours / Português: horas de atraso operacional (HAO)
-#'       \item English: Miscellaneous Worked Hours / Português: horas trabalhadas diversas (HTD)
-#'       \item English: Infrastructure Worked Hours / Português: horas trabalhadas de infraestrutura (HTI)
-#'       \item English: Internal Idle Hours / Português: horas ociosas interna (HOI)
-#'       \item English: External Idle Hours / Português: horas ociosas externa (HOE)
-#'       \item English: Corrective Maintenance Hours / Português: horas de manutenção corretiva (HMC)
-#'       \item English: Accident Hours / Português: horas de acidente (HAC)
-#'       \item English: Systematic Preventive Maintenance Hours / Português: horas preventivas sistemática (MPS)
-#'       \item English: Non-Systematic Preventive Maintenance Hours / Português: horas preventivas não sistemática (MPNS)
+#'       \item EFH: Effective Hours / Horas efetivas.
+#'       \item ODH: Operational Delay Hours / Horas de atraso operacional.
+#'       \item DWH: Different Worked Hours / Horas trabalhadas diversas.
+#'       \item IWH: Infrastructure Worked Hours / Horas trabalhadas de infraestrutura.
+#'       \item IIH: Internal Idle Hours / Horas ociosas internas.
+#'       \item EIH: External Idle Hours / Horas ociosas externas.
+#'       \item CMH: Corrective Maintenance Hours / Horas de manutenção corretiva.
+#'       \item ACH: Accident Hours / Horas de acidente.
+#'       \item SPH: Systematic Preventive Hours / Horas preventivas sistemáticas.
+#'       \item NSPH: Non-Systematic Programmed Hours / Horas preventivas não sistemáticas.
 #'     }}
 #'   \item{description_en}{Operational description in English / Descrição operacional em inglês.}
 #'   \item{comment_en}{Translated telemetry comments (101 relationships) / Comentários da telemetria traduzidos.}
+#'   \item{local_x}{Anonymized local Easting coordinate (meters) / Coordenada local de Leste anonimizada (metros).}
+#'   \item{local_y}{Anonymized local Northing coordinate (meters) / Coordenada local de Norte anonimizada (metros).}
 #'   \item{first_time}{Event start timestamp / Data e hora de início do evento.}
 #'   \item{exit_time}{Event end timestamp / Data e hora de término do evento.}
 #'   \item{duration_min}{Total event duration in minutes / Duração total do evento em minutos.}
@@ -148,27 +153,29 @@ NULL
 #' Mine D Drilling Cycles (Aggregated) / Ciclos de Perfuração - Mina D
 #'
 #' English: Consolidated dataset with performance indicators (KPIs) aggregated by cycle and day,
-#' cross-referenced with official macro-appropriation hours (HO, HM, HT, HC).
+#' including anonymized spatial centroids for each borehole.
 #'
 #' Português: Dataset consolidado com indicadores de performance (KPIs) agregados por ciclo e dia,
-#' cruzando dados de telemetria com horas oficiais de apropriação macro (HO, HM, HT, HC).
+#' incluindo os centroides espaciais anonimizados de cada furo.
 #'
-#' @format A tibble with consolidated KPIs / Um tibble com indicadores de performance:
+#' @format A tibble with 16 columns / Um tibble com 16 colunas:
 #' \describe{
 #'   \item{drill_id}{Unique drill identifier / Identificador único da perfuratriz.}
 #'   \item{drill_fleet}{Drill fleet category / Frota à qual a perfuratriz pertence.}
 #'   \item{origin}{Data origin / Origem da informação.}
 #'   \item{date}{Calendar date / Data civil do registro.}
-#'   \item{xi_min}{Total Operational Cycle Time (Xi) in minutes from telemetry / Tempo total do Ciclo Operacional (Xi) via telemetria.}
-#'   \item{allocated_meters_day}{Total meters drilled by the rig in the day / Total de metros perfurados pela perfuratriz no dia.}
-#'   \item{boreholes_count}{Number of unique borehole UIDs identified / Quantidade de furos únicos (UIDs) identificados.}
-#'   \item{cycle_count}{Number of complete operational cycles identified / Quantidade de ciclos operacionais completos.}
-#'   \item{ho_off}{Official Operational hours (Macro) from ERP/Manual / Horas operacionais oficiais (Macro).}
+#'   \item{cycle}{Sequential cycle ID / ID sequencial do ciclo.}
+#'   \item{borehole_uid}{Unique borehole identifier / Identificador único do furo.}
+#'   \item{local_x}{Anonymized Easting centroid of the borehole / Centroide local de Leste do furo.}
+#'   \item{local_y}{Anonymized Northing centroid of the borehole / Centroide local de Norte do furo.}
+#'   \item{xi_min}{Total Operational Cycle Time (Xi) in minutes / Tempo total do Ciclo Operacional (Xi).}
+#'   \item{allocated_meters}{Total meters drilled in this cycle / Total de metros perfurados neste ciclo.}
+#'   \item{n_phases}{Number of unique productive phases recorded / Quantidade de fases produtivas registradas.}
+#'   \item{ho_off}{Official Operational hours (Macro) / Horas operacionais oficiais (Macro).}
 #'   \item{hm_off}{Official Engine hours (Macro) / Horas de motor oficiais (Macro).}
 #'   \item{ht_off}{Official Total hours (Macro) / Horas totais oficiais (Macro).}
 #'   \item{hc_off}{Official Calendar hours (Macro) / Horas calendário oficiais (Macro).}
-#'   \item{delta_ho}{Difference between telemetry Xi and official HO (minutes) / Diferença entre Xi da telemetria e o HO oficial.}
-#'   \item{avg_rop}{Average Rate of Penetration (m/h) based on productive drilling time / Taxa de Penetração Média (m/h) baseada no tempo de perfuração.}
+#'   \item{avg_rop}{Average Rate of Penetration (m/h) / Taxa de Penetração Média (m/h).}
 #' }
 #' @source Aggregated from drill_events_mine_d and joined with macro-appropriation data.
 "drill_cycles_mine_d"
