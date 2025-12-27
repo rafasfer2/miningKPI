@@ -179,3 +179,37 @@ NULL
 #' }
 #' @source Aggregated from drill_events_mine_d and joined with macro-appropriation data.
 "drill_cycles_mine_d"
+
+#' Mine D Drilling Maintenance Log / Log de Manutenção de Perfuração - Mina D
+#'
+#' English: Processed dataset containing the detailed maintenance history of the drill fleet,
+#' with translated taxonomy (System, Assembly, Component) and categorized failure modes.
+#' Includes standardized KPI categories (CMH, ACH) and cleaned work descriptions.
+#'
+#' Português: Dataset processado contendo o histórico detalhado de manutenção da frota de perfuração,
+#' com taxonomia traduzida (Sistema, Conjunto, Componente) e modos de falha categorizados.
+#' Inclui categorias padronizadas de KPI (CMH, ACH) e descrições de trabalho limpas.
+#'
+#' @format A tibble with 14 columns / Um tibble com 14 colunas:
+#' \describe{
+#'   \item{drill_id}{Unique drill identifier (anonymized) / Identificador único da perfuratriz (anonimizado).}
+#'   \item{start_time}{Maintenance event start timestamp / Data e hora de início do evento de manutenção.}
+#'   \item{end_time}{Maintenance event end timestamp / Data e hora de término do evento de manutenção.}
+#'   \item{duration_h}{Total duration in hours / Duração total em horas.}
+#'   \item{category}{Maintenance KPI Category (International Standards) / Categoria de KPI de Manutenção:
+#'     \itemize{
+#'       \item CMH: Corrective Maintenance Hours / Horas de manutenção corretiva.
+#'       \item ACH: Accident Hours / Horas de acidente.
+#'     }}
+#'   \item{maintenance_team}{Responsible maintenance team (e.g., Mechanical, Electrical) / Equipe de manutenção responsável.}
+#'   \item{action_group}{Grouped failure action type (e.g., Leakage, High Temperature) / Tipo de ação de falha agrupada.}
+#'   \item{system}{Affected machine system (e.g., Hydraulic, Engine) / Sistema da máquina afetado.}
+#'   \item{assembly}{Affected assembly within the system / Conjunto afetado dentro do sistema.}
+#'   \item{component}{Specific component causing the failure / Componente específico causador da falha.}
+#'   \item{failure_mode}{Detected failure mode (e.g., Rupture, Wear) / Modo de falha detectado.}
+#'   \item{action_taken}{Action taken to resolve the issue (e.g., Replace, Repair) / Ação tomada para resolver o problema.}
+#'   \item{comment}{Translated and standardized technician comments / Comentários do técnico traduzidos e padronizados via Regex.}
+#'   \item{type}{Original maintenance type classification / Classificação original do tipo de manutenção (ex: Preventiva, Corretiva).}
+#' }
+#' @source Processed via data-raw/drilling_integration.R from Sossego Mine maintenance records.
+"drill_maintenance_log_mine_d"
