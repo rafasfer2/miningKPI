@@ -66,8 +66,8 @@ add_missing_drill_phases <- function(df) {
         ),
         code             = "299",
         category         = "IIH", # Padronizado para sigla internacional
-        description_en   = "System Imputed - Missing Phase",
-        comment_en       = "Zero-duration structural fill for cycle consistency",
+        description      = "System Imputed - Missing Phase",
+        comment          = "Zero-duration structural fill for cycle consistency",
         duration_min     = 0,
         allocated_meters = 0,
         first_time       = .data$anchor_time,
@@ -84,12 +84,12 @@ add_missing_drill_phases <- function(df) {
     dplyr::group_by(.data$drill_id, .data$cycle) %>%
     dplyr::mutate(
       first_time = dplyr::if_else(
-        .data$description_en == "System Imputed - Missing Phase",
+        .data$description == "System Imputed - Missing Phase",
         dplyr::coalesce(dplyr::lag(.data$exit_time), .data$first_time),
         .data$first_time
       ),
       exit_time = dplyr::if_else(
-        .data$description_en == "System Imputed - Missing Phase",
+        .data$description == "System Imputed - Missing Phase",
         .data$first_time,
         .data$exit_time
       )
@@ -101,8 +101,8 @@ add_missing_drill_phases <- function(df) {
       exit_row$code <- "299"
       exit_row$event_type <- "exit_cycle"
       exit_row$category <- "IIH" # Padronizado para sigla internacional
-      exit_row$description_en <- "Technical Cycle Completion Marker"
-      exit_row$comment_en     <- "Auto-generated phase 6"
+      exit_row$description <- "Technical Cycle Completion Marker"
+      exit_row$comment     <- "Auto-generated phase 6"
       exit_row$first_time     <- last_exit
       exit_row$exit_time      <- last_exit + 0.0001
       exit_row$duration_min   <- 0
