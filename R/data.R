@@ -137,8 +137,8 @@ NULL
 #'       \item SPH: Systematic Preventive Hours / Horas preventivas sistemáticas.
 #'       \item NSPH: Non-Systematic Programmed Hours / Horas preventivas não sistemáticas.
 #'     }}
-#'   \item{description_en}{Operational description in English / Descrição operacional em inglês.}
-#'   \item{comment_en}{Translated telemetry comments (101 relationships) / Comentários da telemetria traduzidos.}
+#'   \item{description}{Operational description in English / Descrição operacional em inglês.}
+#'   \item{comment}{Translated telemetry comments (101 relationships) / Comentários da telemetria traduzidos.}
 #'   \item{local_x}{Anonymized local Easting coordinate (meters) / Coordenada local de Leste anonimizada (metros).}
 #'   \item{local_y}{Anonymized local Northing coordinate (meters) / Coordenada local de Norte anonimizada (metros).}
 #'   \item{first_time}{Event start timestamp / Data e hora de início do evento.}
