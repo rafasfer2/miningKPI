@@ -213,6 +213,52 @@ NULL
 #' }
 #' @source Processed via data-raw/drilling_integration.R from Sossego Mine maintenance records.
 "drill_maintenance_log_mine_d"
+
+#' Produção Diária e Balanço de Massa (Mina D)
+#'
+#' Registos diários históricos da produção de minério, remoção de estéril e
+#' alimentação da planta. Essencial para análises de aderência ao plano e
+#' balanço de massas no contexto de Mining Analytics.
+#'
+#' @format Um data frame (tibble) com as seguintes colunas:
+#' \describe{
+#'   \item{date}{Data da operação.}
+#'   \item{total_movement_t}{Movimentação total de massa em toneladas (Minério + Estéril + Remanejo).}
+#'   \item{ore_mined_t}{Produção de Run of Mine (ROM) em toneladas (TBN - Tonelada Bruta Húmida).}
+#'   \item{waste_mined_t}{Massa de estéril lavrada no dia.}
+#'   \item{crusher_feed_t}{Massa total alimentada no britador primário.}
+#'   \item{rehandling_t}{Massa movimentada em pilhas de estoque (Remanejo).}
+#'   \item{grade_cu_percent}{Teor de Cobre (Cu) realizado no ROM em percentagem.}
+#'   \item{grade_au_gpt}{Teor de Ouro (Au) realizado em gramas por tonelada (g/t).}
+#'   \item{contained_cu_t}{Cobre contido em toneladas.}
+#'   \item{contained_au_oz}{Ouro contido (frequentemente expresso em onças ou massa TBS).}
+#' }
+#' @source Gestão de Performance da Unidade (Dados Reais Tratados)
+"production_forecast_mine_d"
+
+
+#' Planeamento de Performance de Perfuração (Mina D)
+#'
+#' Conjunto de dados contendo as premissas anuais de planeamento (Budget) para
+#' a frota de perfuratrizes rotativas da Mina Sossego. Este dataset serve como
+#' a "Linha de Base" (Baseline) para exemplos da Trilogia de Juran.
+#'
+#' @format Um data frame (tibble) com as seguintes colunas:
+#' \describe{
+#'   \item{date}{Data de referência do valor planeado.}
+#'   \item{drill_id}{Identificador anonimizado da perfuratriz (ex: DRILL_01, DRILL_02).}
+#'   \item{equipment_model}{Nome traduzido do modelo do equipamento (ex: Rotary Drill - Pit Viper).}
+#'   \item{mining_method}{Classificação do diâmetro de perfuração (Large ou Small Diameter).}
+#'   \item{planned_calendar_h}{Horas de calendário planeadas para o período.}
+#'   \item{planned_maint_h}{Horas de manutenção planeadas (Budget).}
+#'   \item{planned_worked_h}{Horas trabalhadas planeadas (Target Worked Hours).}
+#'   \item{target_availability}{Disponibilidade Física (DF) planeada, expressa entre 0 e 1.}
+#'   \item{target_utilization}{Utilização Física (UF) planeada, expressa entre 0 e 1.}
+#'   \item{target_productivity}{Produtividade planeada em metros por hora (m/h).}
+#' }
+#' @source Planeamento Estratégico Sossego (Dados Anonimizados)
+"drill_planning_mine_d"
+#'
 #' Registo de Eventos do Sistema IPCC - Mina E (S11D)
 #'
 #' IPCC System Event Log - Mine E (S11D) / Registo de Eventos do Sistema IPCC - Mina E
