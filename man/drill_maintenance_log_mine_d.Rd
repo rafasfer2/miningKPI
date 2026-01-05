@@ -27,9 +27,6 @@ A tibble with 14 columns / Um tibble com 14 colunas:
 \item{type}{Original maintenance type classification / Classificação original do tipo de manutenção (ex: Preventiva, Corretiva).}
 }
 }
-\source{
-Processed via data-raw/drilling_integration.R from Sossego Mine maintenance records.
-}
 \usage{
 drill_maintenance_log_mine_d
 }

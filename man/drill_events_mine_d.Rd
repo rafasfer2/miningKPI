@@ -39,9 +39,6 @@ A tibble with 18 columns / Um tibble com 18 colunas:
 \item{data_source}{Data source (Telemetry or Manual/Legacy) / Fonte dos dados.}
 }
 }
-\source{
-Processed via data-raw/drilling_integration.R from Sossego Mine telemetry.
-}
 \usage{
 drill_events_mine_d
 }

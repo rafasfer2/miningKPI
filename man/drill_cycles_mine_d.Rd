@@ -25,9 +25,6 @@ A tibble with 16 columns / Um tibble com 16 colunas:
 \item{avg_rop}{Average Rate of Penetration (m/h) / Taxa de Penetração Média (m/h).}
 }
 }
-\source{
-Aggregated from drill_events_mine_d and joined with macro-appropriation data.
-}
 \usage{
 drill_cycles_mine_d
 }

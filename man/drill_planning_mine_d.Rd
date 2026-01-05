@@ -3,31 +3,31 @@
 \docType{data}
 \name{drill_planning_mine_d}
 \alias{drill_planning_mine_d}
-\title{Planeamento de Performance de Perfuração (Mina D)}
+\title{Mine D Drilling Planning (Budget) / Planeamento de Perfuração (Budget) - Mina D}
 \format{
-Um data frame (tibble) com as seguintes colunas:
+A tibble with 10 columns / Um tibble com 10 colunas:
 \describe{
-\item{date}{Data de referência do valor planeado.}
-\item{drill_id}{Identificador anonimizado da perfuratriz (ex: DRILL_01, DRILL_02).}
-\item{equipment_model}{Nome traduzido do modelo do equipamento (ex: Rotary Drill - Pit Viper).}
-\item{mining_method}{Classificação do diâmetro de perfuração (Large ou Small Diameter).}
-\item{planned_calendar_h}{Horas de calendário planeadas para o período.}
-\item{planned_maint_h}{Horas de manutenção planeadas (Budget).}
-\item{planned_worked_h}{Horas trabalhadas planeadas (Target Worked Hours).}
-\item{target_availability}{Disponibilidade Física (DF) planeada, expressa entre 0 e 1.}
-\item{target_utilization}{Utilização Física (UF) planeada, expressa entre 0 e 1.}
-\item{target_productivity}{Produtividade planeada em metros por hora (m/h).}
+\item{date}{Reference date for the planned value / Data de referência do valor planeado.}
+\item{drill_id}{Anonymized drill identifier / Identificador anonimizado da perfuratriz.}
+\item{equipment_model}{Translated equipment model name / Nome traduzido do modelo do equipamento.}
+\item{mining_method}{Drilling diameter classification (Large/Small) / Classificação do diâmetro de perfuração.}
+\item{planned_calendar_h}{Planned calendar hours / Horas de calendário planeadas.}
+\item{planned_maint_h}{Planned maintenance hours (Budget) / Horas de manutenção planeadas.}
+\item{planned_worked_h}{Planned worked hours (Target) / Horas trabalhadas planeadas (Target).}
+\item{target_availability}{Planned Physical Availability (0-1) / Disponibilidade Física (DF) planeada.}
+\item{target_utilization}{Planned Physical Utilization (0-1) / Utilização Física (UF) planeada.}
+\item{target_productivity}{Planned productivity in meters per hour (m/h) / Produtividade planeada em metros por hora (m/h).}
 }
-}
-\source{
-Planeamento Estratégico Sossego (Dados Anonimizados)
 }
 \usage{
 drill_planning_mine_d
 }
 \description{
-Conjunto de dados contendo as premissas anuais de planeamento (Budget) para
-a frota de perfuratrizes rotativas da Mina Sossego. Este dataset serve como
-a "Linha de Base" (Baseline) para exemplos da Trilogia de Juran.
+English: Strategic annual planning premises (Budget) for the drill rig fleet.
+Serves as the Strategic Quality Planning baseline for Juran's Trilogy examples.
+}
+\details{
+Português: Premissas de planeamento anual estratégico (Budget) para a frota de perfuratrizes.
+Serve como linha de base para o Planeamento da Qualidade na Trilogia de Juran.
 }
 \keyword{datasets}

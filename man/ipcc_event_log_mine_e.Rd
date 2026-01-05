@@ -3,58 +3,51 @@
 \docType{data}
 \name{ipcc_event_log_mine_e}
 \alias{ipcc_event_log_mine_e}
-\title{Registo de Eventos do Sistema IPCC - Mina E (S11D)}
+\title{IPCC System Event Log - Mine E (S11D) / Registo de Eventos do Sistema IPCC - Mina E}
 \format{
 A tibble with 29 columns / Um tibble com 29 colunas:
 \describe{
 \item{mining_method}{Mining method (IPCC / Truckless) / Método de lavra utilizado.}
-\item{validated}{Audit status: Locked, Validated, or Not Validated / Estado de auditoria do dado: Trancado, Validado ou Não Validado.}
+\item{validated}{Audit status: Locked, Validated, or Not Validated / Estado de auditoria: Trancado, Validado ou Não Validado.}
 \item{phase}{Operation phase: Mining or Development / Fase da operação: Lavra ou Desenvolvimento.}
-\item{production_system}{Production circuit (e.g., Ore Circuit) / Circuito produtivo ao qual o evento pertence.}
-\item{subprocess}{Specific operational subprocess / Subprocesso operacional específico dentro da linha de fluxo.}
-\item{line}{Physical line identification / Identificação física da linha de transporte.}
-\item{equipment}{Anonymized main equipment ID / ID anonimizado do equipamento principal monitorizado.}
-\item{event_code}{Technical status code (e.g., FIX1, FIX3) / Código técnico do estado do equipamento.}
-\item{event_description}{Translated status description / Descrição traduzida do estado (Stopped, Running, Interlock).}
-\item{activity_code}{Specific activity code / Código da atividade específica realizada.}
-\item{activity_description}{Technical activity description / Descrição técnica da atividade (ex: Trackshift, Face Advance).}
+\item{production_system}{Production circuit (e.g., Ore Circuit) / Circuito produtivo.}
+\item{subprocess}{Specific operational subprocess / Subprocesso operacional específico.}
+\item{line}{Physical line identification / Identificação física da linha.}
+\item{equipment}{Anonymized main equipment ID / ID anonimizado do equipamento principal.}
+\item{event_code}{Technical status code (e.g., FIX1, FIX3) / Código técnico do estado.}
+\item{event_description}{Translated status description / Descrição traduzida do estado.}
+\item{activity_code}{Specific activity code / Código da atividade específica.}
+\item{activity_description}{Technical activity description / Descrição técnica da atividade.}
 \item{start_time}{Event start timestamp / Data e hora de início do evento (POSIXct).}
 \item{end_time}{Event end timestamp / Data e hora de término do evento (POSIXct).}
-\item{duration_h}{Duration in decimal hours / Duração do evento convertida em horas decimais.}
+\item{duration_h}{Duration in decimal hours / Duração do evento em horas decimais.}
 \item{egp}{Anonymized ID of the Downtime Generator Equipment / ID anonimizado do Equipamento Gerador de Parada (EGP).}
 \item{asset_family}{Asset technical family (e.g., Conveyors) / Família técnica do ativo causador.}
-\item{asset_class}{Detailed asset class / Classe técnica detalhada do ativo (ex: Apron Feeder, Belt Splice).}
-\item{sector}{Responsible sector / Setor responsável pela intervenção ou apontamento (ex: Mechanical, Operations).}
-\item{cause}{Translated root cause / Causa raiz do evento traduzida através de glossário técnico.}
-\item{failure}{Translated failure mode / Modo de falha detalhado traduzido através de glossário técnico.}
-\item{hour_category}{KPI category (see Details) / Categoria de KPI da Identidade Fundamental (ver Detalhes).}
-\item{hour_category_phase}{KPI category aggregated by Phase / Categoria de KPI agregada ao nível da Fase Produtiva.}
-\item{hour_category_system}{KPI category aggregated by System / Categoria de KPI agregada ao nível do Sistema Produtivo.}
-\item{hour_category_sub}{KPI category aggregated by Subprocess / Categoria de KPI agregada ao nível do Subprocesso.}
-\item{hour_category_line}{KPI category aggregated by Line / Categoria de KPI agregada ao nível da Linha Física.}
+\item{asset_class}{Detailed asset class / Classe técnica detalhada do ativo.}
+\item{sector}{Responsible sector / Setor responsável (ex: Mechanical, Operations).}
+\item{cause}{Translated root cause / Causa raiz do evento traduzida.}
+\item{failure}{Translated failure mode / Modo de falha detalhado traduzido.}
+\item{hour_category}{KPI category (see Details) / Categoria de KPI (ver Detalhes).}
+\item{hour_category_phase}{KPI category by Phase / Categoria de KPI por Fase Produtiva.}
+\item{hour_category_system}{KPI category by System / Categoria de KPI por Sistema Produtivo.}
+\item{hour_category_sub}{KPI category by Subprocess / Categoria de KPI por Subprocesso.}
+\item{hour_category_line}{KPI category by Line / Categoria de KPI por Linha Física.}
 \item{shift}{Team/Shift identification (A, B, C, D, Y) / Identificação da equipa/turno.}
-\item{auto_manual}{Record origin: Automatic or Manual / Origem do registo: Automático (Telemetria) ou Manual.}
-\item{maint_order}{Anonymized Maintenance Order number / Número da Ordem de Manutenção associada (anonimizada).}
-\item{virtual_equipment}{Indicates if the asset is a logical link (Yes) or physical (No) / Ativo é elo lógico (Yes) ou físico (No).}
+\item{auto_manual}{Record origin: Automatic or Manual / Origem do registo: Automático ou Manual.}
+\item{maint_order}{Anonymized Maintenance Order / Ordem de Manutenção anonimizada.}
+\item{virtual_equipment}{Indicates if asset is logical (Yes) or physical (No) / Ativo é elo lógico ou físico.}
 }
-}
-\source{
-Processed from S11D (Serra Sul) operational records for the "Mining Analytics" book.
 }
 \usage{
 ipcc_event_log_mine_e
 }
 \description{
-IPCC System Event Log - Mine E (S11D) / Registo de Eventos do Sistema IPCC - Mina E
-}
-\details{
 English: A comprehensive dataset containing the operational and maintenance event history
 of an IPCC (In-Pit Crushing and Conveying) system at the Serra Sul unit.
-The data has been anonymized and translated for academic and professional purposes.
-
+}
+\details{
 Português: Um conjunto de dados contendo o histórico de eventos operacionais e de manutenção
 de um sistema IPCC (In-Pit Crushing and Conveying) na unidade Serra Sul.
-Os dados foram anonimizados e traduzidos para fins académicos e profissionais.
 
 English: Explanation of the hour categories (KPIs) based on the Fundamental Identity:
 Português: Explicação das categorias de horas (KPIs) baseadas na Identidade Fundamental:

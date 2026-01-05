@@ -1,6 +1,10 @@
 #' @importFrom tibble tibble
 NULL
 
+################################################################################
+# --- MINA A: LOADING & HAULING (CARREGAMENTO E TRANSPORTE) ---
+################################################################################
+
 #' Mine A Loading Events (Base Notation) / Eventos de Carregamento - Mina A
 #'
 #' English: A tidy, long-format dataset representing the stochastic loading process.
@@ -104,6 +108,11 @@ NULL
 #' }
 "haul_cycles_mine_a"
 
+
+################################################################################
+# --- MINA D: DRILLING & PRODUCTION (PERFURAÇÃO E PRODUÇÃO) ---
+################################################################################
+
 #' Mine D Drilling Events / Eventos de Perfuração - Mina D
 #'
 #' English: Processed dataset containing the detailed event history of each drill rig,
@@ -147,7 +156,6 @@ NULL
 #'   \item{allocated_meters}{Drilled meters proportionally allocated to the event / Metros perfurados alocados proporcionalmente.}
 #'   \item{data_source}{Data source (Telemetry or Manual/Legacy) / Fonte dos dados.}
 #' }
-#' @source Processed via data-raw/drilling_integration.R from Sossego Mine telemetry.
 "drill_events_mine_d"
 
 #' Mine D Drilling Cycles (Aggregated) / Ciclos de Perfuração - Mina D
@@ -177,7 +185,6 @@ NULL
 #'   \item{hc_off}{Official Calendar hours (Macro) / Horas calendário oficiais (Macro).}
 #'   \item{avg_rop}{Average Rate of Penetration (m/h) / Taxa de Penetração Média (m/h).}
 #' }
-#' @source Aggregated from drill_events_mine_d and joined with macro-appropriation data.
 "drill_cycles_mine_d"
 
 #' Mine D Drilling Maintenance Log / Log de Manutenção de Perfuração - Mina D
@@ -211,65 +218,66 @@ NULL
 #'   \item{comment}{Translated and standardized technician comments / Comentários do técnico traduzidos e padronizados via Regex.}
 #'   \item{type}{Original maintenance type classification / Classificação original do tipo de manutenção (ex: Preventiva, Corretiva).}
 #' }
-#' @source Processed via data-raw/drilling_integration.R from Sossego Mine maintenance records.
 "drill_maintenance_log_mine_d"
 
-#' Produção Diária e Balanço de Massa (Mina D)
+#' Mine D Daily Production Forecast (D+30) / Previsão Diária de Produção (D+30) - Mina D
 #'
-#' Registos diários históricos da produção de minério, remoção de estéril e
-#' alimentação da planta. Essencial para análises de aderência ao plano e
-#' balanço de massas no contexto de Mining Analytics.
+#' English: Tactical look-ahead forecast dataset (D+30) containing daily production targets,
+#' waste removal, and plant feeding premises. Used as the Tactical Planning baseline.
 #'
-#' @format Um data frame (tibble) com as seguintes colunas:
+#' Português: Dataset de previsão tática look-ahead (D+30) contendo as metas de produção diária,
+#' remoção de estéril e premissas de alimentação da planta. Utilizado como linha de base tática.
+#'
+#' @format A tibble with 12 columns / Um tibble com 12 colunas:
 #' \describe{
-#'   \item{date}{Data da operação.}
-#'   \item{total_movement_t}{Movimentação total de massa em toneladas (Minério + Estéril + Remanejo).}
-#'   \item{ore_mined_t}{Produção de Run of Mine (ROM) em toneladas (TBN - Tonelada Bruta Húmida).}
-#'   \item{waste_mined_t}{Massa de estéril lavrada no dia.}
-#'   \item{crusher_feed_t}{Massa total alimentada no britador primário.}
-#'   \item{rehandling_t}{Massa movimentada em pilhas de estoque (Remanejo).}
-#'   \item{grade_cu_percent}{Teor de Cobre (Cu) realizado no ROM em percentagem.}
-#'   \item{grade_au_gpt}{Teor de Ouro (Au) realizado em gramas por tonelada (g/t).}
-#'   \item{contained_cu_t}{Cobre contido em toneladas.}
-#'   \item{contained_au_oz}{Ouro contido (frequentemente expresso em onças ou massa TBS).}
+#'   \item{date}{Operational date / Data da operação.}
+#'   \item{total_movement_t}{Forecasted total mass movement (Ore + Waste + Rehandling) / Movimentação total prevista (Minério + Estéril + Remanejo).}
+#'   \item{ore_mined_t}{Forecasted ore production (ROM) in wet tonnes (TBN) / Produção de minério (ROM) prevista em toneladas brutas húmidas (TBN).}
+#'   \item{waste_mined_t}{Forecasted waste removal / Massa de estéril prevista para lavra.}
+#'   \item{crusher_feed_t}{Forecasted crusher feed / Massa prevista para alimentação do britador primário.}
+#'   \item{rehandling_t}{Forecasted rehandling from stockpiles / Massa prevista para remanejo de estoques.}
+#'   \item{grade_cu_percent}{Forecasted Copper (Cu) grade / Teor de Cobre (Cu) previsto.}
+#'   \item{grade_au_gpt}{Forecasted Gold (Au) grade / Teor de Ouro (Au) previsto.}
+#'   \item{contained_cu_t}{Forecasted contained Copper / Cobre contido previsto.}
+#'   \item{contained_au_oz}{Forecasted contained Gold / Ouro contido previsto.}
 #' }
-#' @source Gestão de Performance da Unidade (Dados Reais Tratados)
 "production_forecast_mine_d"
 
-
-#' Planeamento de Performance de Perfuração (Mina D)
+#' Mine D Drilling Planning (Budget) / Planeamento de Perfuração (Budget) - Mina D
 #'
-#' Conjunto de dados contendo as premissas anuais de planeamento (Budget) para
-#' a frota de perfuratrizes rotativas da Mina Sossego. Este dataset serve como
-#' a "Linha de Base" (Baseline) para exemplos da Trilogia de Juran.
+#' English: Strategic annual planning premises (Budget) for the drill rig fleet.
+#' Serves as the Strategic Quality Planning baseline for Juran's Trilogy examples.
 #'
-#' @format Um data frame (tibble) com as seguintes colunas:
+#' Português: Premissas de planeamento anual estratégico (Budget) para a frota de perfuratrizes.
+#' Serve como linha de base para o Planeamento da Qualidade na Trilogia de Juran.
+#'
+#' @format A tibble with 10 columns / Um tibble com 10 colunas:
 #' \describe{
-#'   \item{date}{Data de referência do valor planeado.}
-#'   \item{drill_id}{Identificador anonimizado da perfuratriz (ex: DRILL_01, DRILL_02).}
-#'   \item{equipment_model}{Nome traduzido do modelo do equipamento (ex: Rotary Drill - Pit Viper).}
-#'   \item{mining_method}{Classificação do diâmetro de perfuração (Large ou Small Diameter).}
-#'   \item{planned_calendar_h}{Horas de calendário planeadas para o período.}
-#'   \item{planned_maint_h}{Horas de manutenção planeadas (Budget).}
-#'   \item{planned_worked_h}{Horas trabalhadas planeadas (Target Worked Hours).}
-#'   \item{target_availability}{Disponibilidade Física (DF) planeada, expressa entre 0 e 1.}
-#'   \item{target_utilization}{Utilização Física (UF) planeada, expressa entre 0 e 1.}
-#'   \item{target_productivity}{Produtividade planeada em metros por hora (m/h).}
+#'   \item{date}{Reference date for the planned value / Data de referência do valor planeado.}
+#'   \item{drill_id}{Anonymized drill identifier / Identificador anonimizado da perfuratriz.}
+#'   \item{equipment_model}{Translated equipment model name / Nome traduzido do modelo do equipamento.}
+#'   \item{mining_method}{Drilling diameter classification (Large/Small) / Classificação do diâmetro de perfuração.}
+#'   \item{planned_calendar_h}{Planned calendar hours / Horas de calendário planeadas.}
+#'   \item{planned_maint_h}{Planned maintenance hours (Budget) / Horas de manutenção planeadas.}
+#'   \item{planned_worked_h}{Planned worked hours (Target) / Horas trabalhadas planeadas (Target).}
+#'   \item{target_availability}{Planned Physical Availability (0-1) / Disponibilidade Física (DF) planeada.}
+#'   \item{target_utilization}{Planned Physical Utilization (0-1) / Utilização Física (UF) planeada.}
+#'   \item{target_productivity}{Planned productivity in meters per hour (m/h) / Produtividade planeada em metros por hora (m/h).}
 #' }
-#' @source Planeamento Estratégico Sossego (Dados Anonimizados)
 "drill_planning_mine_d"
-#'
-#' Registo de Eventos do Sistema IPCC - Mina E (S11D)
-#'
+
+
+################################################################################
+# --- MINA E: IPCC SYSTEM (SISTEMA IPCC) ---
+################################################################################
+
 #' IPCC System Event Log - Mine E (S11D) / Registo de Eventos do Sistema IPCC - Mina E
 #'
 #' English: A comprehensive dataset containing the operational and maintenance event history
 #' of an IPCC (In-Pit Crushing and Conveying) system at the Serra Sul unit.
-#' The data has been anonymized and translated for academic and professional purposes.
 #'
 #' Português: Um conjunto de dados contendo o histórico de eventos operacionais e de manutenção
 #' de um sistema IPCC (In-Pit Crushing and Conveying) na unidade Serra Sul.
-#' Os dados foram anonimizados e traduzidos para fins académicos e profissionais.
 #'
 #' @details
 #' English: Explanation of the hour categories (KPIs) based on the Fundamental Identity:
@@ -290,34 +298,33 @@ NULL
 #' @format A tibble with 29 columns / Um tibble com 29 colunas:
 #' \describe{
 #'   \item{mining_method}{Mining method (IPCC / Truckless) / Método de lavra utilizado.}
-#'   \item{validated}{Audit status: Locked, Validated, or Not Validated / Estado de auditoria do dado: Trancado, Validado ou Não Validado.}
+#'   \item{validated}{Audit status: Locked, Validated, or Not Validated / Estado de auditoria: Trancado, Validado ou Não Validado.}
 #'   \item{phase}{Operation phase: Mining or Development / Fase da operação: Lavra ou Desenvolvimento.}
-#'   \item{production_system}{Production circuit (e.g., Ore Circuit) / Circuito produtivo ao qual o evento pertence.}
-#'   \item{subprocess}{Specific operational subprocess / Subprocesso operacional específico dentro da linha de fluxo.}
-#'   \item{line}{Physical line identification / Identificação física da linha de transporte.}
-#'   \item{equipment}{Anonymized main equipment ID / ID anonimizado do equipamento principal monitorizado.}
-#'   \item{event_code}{Technical status code (e.g., FIX1, FIX3) / Código técnico do estado do equipamento.}
-#'   \item{event_description}{Translated status description / Descrição traduzida do estado (Stopped, Running, Interlock).}
-#'   \item{activity_code}{Specific activity code / Código da atividade específica realizada.}
-#'   \item{activity_description}{Technical activity description / Descrição técnica da atividade (ex: Trackshift, Face Advance).}
+#'   \item{production_system}{Production circuit (e.g., Ore Circuit) / Circuito produtivo.}
+#'   \item{subprocess}{Specific operational subprocess / Subprocesso operacional específico.}
+#'   \item{line}{Physical line identification / Identificação física da linha.}
+#'   \item{equipment}{Anonymized main equipment ID / ID anonimizado do equipamento principal.}
+#'   \item{event_code}{Technical status code (e.g., FIX1, FIX3) / Código técnico do estado.}
+#'   \item{event_description}{Translated status description / Descrição traduzida do estado.}
+#'   \item{activity_code}{Specific activity code / Código da atividade específica.}
+#'   \item{activity_description}{Technical activity description / Descrição técnica da atividade.}
 #'   \item{start_time}{Event start timestamp / Data e hora de início do evento (POSIXct).}
 #'   \item{end_time}{Event end timestamp / Data e hora de término do evento (POSIXct).}
-#'   \item{duration_h}{Duration in decimal hours / Duração do evento convertida em horas decimais.}
+#'   \item{duration_h}{Duration in decimal hours / Duração do evento em horas decimais.}
 #'   \item{egp}{Anonymized ID of the Downtime Generator Equipment / ID anonimizado do Equipamento Gerador de Parada (EGP).}
 #'   \item{asset_family}{Asset technical family (e.g., Conveyors) / Família técnica do ativo causador.}
-#'   \item{asset_class}{Detailed asset class / Classe técnica detalhada do ativo (ex: Apron Feeder, Belt Splice).}
-#'   \item{sector}{Responsible sector / Setor responsável pela intervenção ou apontamento (ex: Mechanical, Operations).}
-#'   \item{cause}{Translated root cause / Causa raiz do evento traduzida através de glossário técnico.}
-#'   \item{failure}{Translated failure mode / Modo de falha detalhado traduzido através de glossário técnico.}
-#'   \item{hour_category}{KPI category (see Details) / Categoria de KPI da Identidade Fundamental (ver Detalhes).}
-#'   \item{hour_category_phase}{KPI category aggregated by Phase / Categoria de KPI agregada ao nível da Fase Produtiva.}
-#'   \item{hour_category_system}{KPI category aggregated by System / Categoria de KPI agregada ao nível do Sistema Produtivo.}
-#'   \item{hour_category_sub}{KPI category aggregated by Subprocess / Categoria de KPI agregada ao nível do Subprocesso.}
-#'   \item{hour_category_line}{KPI category aggregated by Line / Categoria de KPI agregada ao nível da Linha Física.}
+#'   \item{asset_class}{Detailed asset class / Classe técnica detalhada do ativo.}
+#'   \item{sector}{Responsible sector / Setor responsável (ex: Mechanical, Operations).}
+#'   \item{cause}{Translated root cause / Causa raiz do evento traduzida.}
+#'   \item{failure}{Translated failure mode / Modo de falha detalhado traduzido.}
+#'   \item{hour_category}{KPI category (see Details) / Categoria de KPI (ver Detalhes).}
+#'   \item{hour_category_phase}{KPI category by Phase / Categoria de KPI por Fase Produtiva.}
+#'   \item{hour_category_system}{KPI category by System / Categoria de KPI por Sistema Produtivo.}
+#'   \item{hour_category_sub}{KPI category by Subprocess / Categoria de KPI por Subprocesso.}
+#'   \item{hour_category_line}{KPI category by Line / Categoria de KPI por Linha Física.}
 #'   \item{shift}{Team/Shift identification (A, B, C, D, Y) / Identificação da equipa/turno.}
-#'   \item{auto_manual}{Record origin: Automatic or Manual / Origem do registo: Automático (Telemetria) ou Manual.}
-#'   \item{maint_order}{Anonymized Maintenance Order number / Número da Ordem de Manutenção associada (anonimizada).}
-#'   \item{virtual_equipment}{Indicates if the asset is a logical link (Yes) or physical (No) / Ativo é elo lógico (Yes) ou físico (No).}
+#'   \item{auto_manual}{Record origin: Automatic or Manual / Origem do registo: Automático ou Manual.}
+#'   \item{maint_order}{Anonymized Maintenance Order / Ordem de Manutenção anonimizada.}
+#'   \item{virtual_equipment}{Indicates if asset is logical (Yes) or physical (No) / Ativo é elo lógico ou físico.}
 #' }
-#' @source Processed from S11D (Serra Sul) operational records for the "Mining Analytics" book.
 "ipcc_event_log_mine_e"
