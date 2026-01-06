@@ -108,7 +108,6 @@ NULL
 #' }
 "haul_cycles_mine_a"
 
-
 ################################################################################
 # --- MINA D: DRILLING & PRODUCTION (PERFURAÇÃO E PRODUÇÃO) ---
 ################################################################################
@@ -241,7 +240,7 @@ NULL
 #'   \item{contained_cu_t}{Forecasted contained Copper / Cobre contido previsto.}
 #'   \item{contained_au_oz}{Forecasted contained Gold / Ouro contido previsto.}
 #' }
-"production_forecast_mine_d"
+"drill_production_forecast_mine_d"
 
 #' Mine D Drilling Planning (Budget) / Planeamento de Perfuração (Budget) - Mina D
 #'
@@ -327,4 +326,4 @@ NULL
 #'   \item{maint_order}{Anonymized Maintenance Order / Ordem de Manutenção anonimizada.}
 #'   \item{virtual_equipment}{Indicates if asset is logical (Yes) or physical (No) / Ativo é elo lógico ou físico.}
 #' }
-"ipcc_event_log_mine_e"
+"ipcc_events_mine_e"
